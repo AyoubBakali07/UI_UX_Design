@@ -1,0 +1,65 @@
+classDiagram
+    class Etudiant {
+        +id: int
+        +nom: string
+        +email: string
+        +progression: EtatProgression
+    }
+
+    class Autoformation {
+        +id: int
+        +titre: string
+        +description: string
+        +progressionGlobale: EtatProgression
+
+    }
+
+    class Tuto {
+        +id: int
+        +titre: string
+        +contenu: string
+        +progression: EtatProgression
+
+    }
+
+    class Lien {
+        +id: int
+        +type: string
+        +url: string
+        +dateAjout: Date
+    }
+
+    class Formateur {
+        +id: int
+        +nom: string
+        +groupe: string
+        +email: string
+   }
+
+    class Responsable {
+        +id: int
+        +nom: string
+        +email: string
+    }
+
+    class Rapport {
+        +id: int
+        +contenu: string
+        +dateGeneration: Date
+    }
+
+    class EtatProgression {
+        <<enumeration>>
+        TO_DO
+        IN_PROGRESS
+        DONE
+    }
+
+    %% Relationships
+    Etudiant "1" -- "0..*" Lien : ajoute/supprime
+    Etudiant "1" -- "0..*" Autoformation : suit
+    Autoformation "1" -- "0..*" Tuto : contient
+    Tuto "1" -- "1" EtatProgression : suit
+    Formateur "1" -- "0..*" Rapport : consulte
+    Responsable "1" -- "0..*" Rapport : génère
+    Rapport "1" -- "0..*" Autoformation : contient
