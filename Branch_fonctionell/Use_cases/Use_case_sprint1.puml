@@ -4,28 +4,18 @@ actor Étudiant
 actor Formateur
 actor "Responsable de Formation" as Responsable
 
-rectangle "package_suivi_avancement_autoformation" {
+rectangle "Sprint 1: Core Functionality for Progress Tracking" {
     usecase "Suivre sa progression" as UC1
-    usecase "Recevoir des notifications de tâches à accomplir" as UC2
     usecase "Visualiser les modules terminés et restants" as UC3
-    usecase "Modifier ou Supprimer ses liens" as UC8
     usecase "Ajouter des liens" as UC9
     usecase "Accéder aux rapports d'avancement" as UC4
-    usecase "Fournir des commentaires sur l'avancement" as UC5
-    usecase "Générer des rapports automatiques" as UC7
 }
 
 Étudiant -- UC1
-Étudiant -- UC2
 Étudiant -- UC3
-Étudiant -- UC8
 Étudiant -- UC9
 
-
 Formateur -- UC4
-Formateur -- UC5
-
 
 Responsable -- UC4
-Responsable -- UC7
 @enduml

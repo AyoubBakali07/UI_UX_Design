@@ -1,0 +1,21 @@
+@startuml
+left to right direction
+actor Étudiant
+actor Formateur
+actor "Responsable de Formation" as Responsable
+
+rectangle "Sprint 2: Advanced Features and Automation" {
+    usecase "Modifier ou Supprimer ses liens" as UC8
+        usecase "Recevoir des notifications de tâches à accomplir" as UC2
+
+    usecase "Fournir des commentaires sur l'avancement" as UC5
+    usecase "Générer des rapports automatiques" as UC7
+}
+
+Étudiant -- UC8
+Étudiant -- UC2
+
+Formateur -- UC5
+
+Responsable -- UC7
+@enduml
