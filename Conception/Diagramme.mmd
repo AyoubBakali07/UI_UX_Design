@@ -1,5 +1,5 @@
 classDiagram
-    class Etudiant {
+    class Apprenant {
         +id: int
         +nom: string
         +email: string
@@ -9,9 +9,8 @@ classDiagram
     class Autoformation {
         +id: int
         +titre: string
-        +description: string
+        +description : string
         +progressionGlobale: EtatProgression
-
     }
 
     class Tuto {
@@ -19,33 +18,18 @@ classDiagram
         +titre: string
         +contenu: string
         +progression: EtatProgression
-
     }
 
-    class Lien {
+    class Formation {
         +id: int
-        +type: string
-        +url: string
-        +dateAjout: Date
+        +titre: string
+        +description: string
     }
 
-    class Formateur {
+    class Realisation {
         +id: int
-        +nom: string
-        +groupe: string
-        +email: string
-   }
-
-    class Responsable {
-        +id: int
-        +nom: string
-        +email: string
-    }
-
-    class Rapport {
-        +id: int
-        +contenu: string
-        +dateGeneration: Date
+        +date: Date
+        +status: string
     }
 
     class EtatProgression {
@@ -56,10 +40,9 @@ classDiagram
     }
 
     %% Relationships
-    Etudiant "1" -- "0..*" Lien : ajoute/supprime
-    Etudiant "1" -- "0..*" Autoformation : suit
-    Autoformation "1" -- "0..*" Tuto : contient
+    Apprenant "1" -- "*" Autoformation : suit
+    Formation "1" -- "*" Tuto : contient
+    Formation "1" -- "*" Autoformation : contient
+    Autoformation "1" -- "*" Realisation : suit
     Tuto "1" -- "1" EtatProgression : suit
-    Formateur "1" -- "0..*" Rapport : consulte
-    Responsable "1" -- "0..*" Rapport : génère
-    Rapport "1" -- "0..*" Autoformation : contient
+    Tuto "1" -- "1" Realisation : estLiéeÀ

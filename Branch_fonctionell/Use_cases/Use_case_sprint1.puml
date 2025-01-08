@@ -2,7 +2,6 @@
 left to right direction
 actor Étudiant
 actor Formateur
-actor "Responsable de Formation" as Responsable
 
 rectangle "Sprint 1: Core Functionality for Progress Tracking" {
     usecase "Suivre sa progression" as UC1
@@ -17,5 +16,5 @@ rectangle "Sprint 1: Core Functionality for Progress Tracking" {
 
 Formateur -- UC4
 
-Responsable -- UC4
+
 @enduml
