@@ -3,46 +3,43 @@ classDiagram
         +id: int
         +nom: string
         +email: string
-        +progression: EtatProgression
+        +password: string
     }
 
     class Autoformation {
         +id: int
         +titre: string
         +description : string
-        +progressionGlobale: EtatProgression
+        +start_date: date
+        +end_date: date
     }
 
     class Tuto {
         +id: int
         +titre: string
         +contenu: string
-        +progression: EtatProgression
+        +order:int
+        +progression: string
     }
 
     class Formation {
         +id: int
         +titre: string
         +description: string
+
     }
 
     class Realisation {
         +id: int
         +date: Date
         +status: string
+        +commentaire: string
     }
 
-    class EtatProgression {
-        <<enumeration>>
-        TO_DO
-        IN_PROGRESS
-        DONE
-    }
 
     %% Relationships
     Apprenant "1" -- "*" Autoformation : suit
     Formation "1" -- "*" Tuto : contient
     Formation "1" -- "*" Autoformation : contient
     Autoformation "1" -- "*" Realisation : suit
-    Tuto "1" -- "1" EtatProgression : suit
     Tuto "1" -- "1" Realisation : estLiéeÀ
