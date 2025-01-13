@@ -4,7 +4,6 @@
 <?php
 include_once '../layouts/head.php';
 ?>
-
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
         <?php
@@ -25,82 +24,84 @@ include_once '../layouts/head.php';
                             <div class="d-flex overflow-auto" style="gap: 1rem;"> <!-- Scrollable container -->
                                 <!-- Card 1 -->
                                 <div class="card" style="width: 15rem; flex-shrink: 0;">
-                                    <img src="https://via.placeholder.com/300x150" class="card-img-top" alt="Card 1">
+                                    <img src="../lv.png" class="card-img-top" alt="Card 1">
                                     <div class="card-body">
                                         <h5 class="card-title">HTML/CSS</h5>
                                         <p class="card-text">Some quick example.</p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                        <a href="#" class="btn btn-primary">Enroll Now</a>
                                     </div>
                                 </div>
 
                                 <!-- Card 2 -->
                                 <div class="card" style="width: 15rem; flex-shrink: 0;">
-                                    <img src="https://via.placeholder.com/300x150" class="card-img-top" alt="Card 2">
+                                    <img src="../lv.png" class="card-img-top" alt="Card 2">
                                     <div class="card-body">
                                         <h5 class="card-title">PHP Eloquent</h5>
                                         <p class="card-text">Some quick example.</p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                        <a href="#" class="btn btn-primary">Enroll Now</a>
                                     </div>
                                 </div>
 
                                 <!-- Card 3 -->
                                 <div class="card" style="width: 15rem; flex-shrink: 0;">
-                                    <img src="https://via.placeholder.com/300x150" class="card-img-top" alt="Card 3">
+                                    <img src="../lv.png" class="card-img-top" alt="Card 3">
                                     <div class="card-body">
                                         <h5 class="card-title">PHP OOP</h5>
                                         <p class="card-text">Some quick example.</p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                        <a href="#" class="btn btn-primary">Enroll Now</a>
                                     </div>
                                 </div>
 
                                 <!-- Card 4 -->
                                 <div class="card" style="width: 15rem; flex-shrink: 0;">
-                                    <img src="https://via.placeholder.com/300x150" class="card-img-top" alt="Card 4">
+                                    <img src="../lv.png" class="card-img-top" alt="Card 4">
                                     <div class="card-body">
                                         <h5 class="card-title">JavaScript Basics</h5>
                                         <p class="card-text">Some quick example.</p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                        <a href="#" class="btn btn-primary">Enroll Now</a>
                                     </div>
                                 </div>
 
                                 <!-- Card 5 -->
                                 <div class="card" style="width: 15rem; flex-shrink: 0; overflow:hidden:">
-                                    <img src="https://via.placeholder.com/300x150" class="card-img-top" alt="Card 5">
+                                    <img src="../lv.png" class="card-img-top" alt="Card 5">
                                     <div class="card-body">
                                         <h5 class="card-title">Laravel</h5>
                                         <p class="card-text">Some quick example.</p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                        <a href="#" class="btn btn-primary">Enroll Now</a>
                                     </div>
                                 </div>
                             </div>
-                            <h1>test</h1>
-                            <table class="table table-bordered">
-  <thead class="background-primary">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
+                            <h1 class="mr-3">Mes Informations</h1>
+                            <table class="table table-bordered border-primary">
+                    <thead class="background-primary ">
+                        <tr>
+                        <th scope="col">Course name</th>
+                        <th scope="col">Start</th>
+                        <!-- <th scope="col">Label</th> -->
+                        <th scope="col">Progress</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <th scope="row ">HTML/CSS</th>
+                        <td>May 12</td>
+                        <!-- <td>Otto</td> -->
+                        <td><span class="badge badge-primary">100%</span></td>
+                        </tr>
+                        <tr>
+                        <th scope="row">PHP Eloquent</th>
+                        <td>Junary 03</td>
+                        <!-- <td>Test</td> -->
+                    <td><div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                    </div></td>
+                    </tr> 
+    <!-- <tr>
       <th scope="row">3</th>
       <td colspan="2">Larry the Bird</td>
       <td>@twitter</td>
-    </tr>
+    </tr> -->
   </tbody>
 </table>
                         </div>
