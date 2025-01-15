@@ -1,3 +1,4 @@
+
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
   <a href="" class="brand-link">
@@ -35,7 +36,7 @@
             <li class="nav-item">
               <a href="/admin/Sanction Rules/create.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Create rule</p>
+                <p>Formation</p>
               </a>
             </li>
             <li class="nav-item">

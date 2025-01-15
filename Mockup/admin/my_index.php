@@ -26,7 +26,7 @@ include_once '../layouts/head.php';
                                 <div class="card" style="width: 15rem; flex-shrink: 0;">
                                     <img src="../lv.png" class="card-img-top" alt="Card 1">
                                     <div class="card-body">
-                                        <h5 class="card-title">HTML/CSS</h5>
+                                        <h5 class="card-title">Front End HTML/CSS</h5>
                                         <p class="card-text">Some quick example.</p>
                                         <a href="#" class="btn btn-primary">Enroll Now</a>
                                     </div>
@@ -36,7 +36,7 @@ include_once '../layouts/head.php';
                                 <div class="card" style="width: 15rem; flex-shrink: 0;">
                                     <img src="../lv.png" class="card-img-top" alt="Card 2">
                                     <div class="card-body">
-                                        <h5 class="card-title">PHP Eloquent</h5>
+                                        <h5 class="card-title">PHP</h5>
                                         <p class="card-text">Some quick example.</p>
                                         <a href="#" class="btn btn-primary">Enroll Now</a>
                                     </div>
@@ -46,7 +46,7 @@ include_once '../layouts/head.php';
                                 <div class="card" style="width: 15rem; flex-shrink: 0;">
                                     <img src="../lv.png" class="card-img-top" alt="Card 3">
                                     <div class="card-body">
-                                        <h5 class="card-title">PHP OOP</h5>
+                                        <h5 class="card-title">Laravel</h5>
                                         <p class="card-text">Some quick example.</p>
                                         <a href="#" class="btn btn-primary">Enroll Now</a>
                                     </div>
