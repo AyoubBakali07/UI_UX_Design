@@ -28,7 +28,7 @@ include_once '../layouts/head.php';
                                     <div class="card-body">
                                         <h5 class="card-title">Front End HTML/CSS</h5>
                                         <p class="card-text">Some quick example.</p>
-                                        <a href="#" class="btn btn-primary">Enroll Now</a>
+                                        <a href="Sanction Rules/create.php" class="btn btn-primary">Enroll Now</a>
                                     </div>
                                 </div>
 
@@ -38,7 +38,7 @@ include_once '../layouts/head.php';
                                     <div class="card-body">
                                         <h5 class="card-title">PHP</h5>
                                         <p class="card-text">Some quick example.</p>
-                                        <a href="#" class="btn btn-primary">Enroll Now</a>
+                                        <a href="Sanction Rules/create.php" class="btn btn-primary">Enroll Now</a>
                                     </div>
                                 </div>
 
@@ -48,7 +48,7 @@ include_once '../layouts/head.php';
                                     <div class="card-body">
                                         <h5 class="card-title">Laravel</h5>
                                         <p class="card-text">Some quick example.</p>
-                                        <a href="#" class="btn btn-primary">Enroll Now</a>
+                                        <a href="Sanction Rules/create.php" class="btn btn-primary">Enroll Now</a>
                                     </div>
                                 </div>
 
@@ -58,7 +58,7 @@ include_once '../layouts/head.php';
                                     <div class="card-body">
                                         <h5 class="card-title">JavaScript Basics</h5>
                                         <p class="card-text">Some quick example.</p>
-                                        <a href="#" class="btn btn-primary">Enroll Now</a>
+                                        <a href="Sanction Rules/create.php" class="btn btn-primary">Enroll Now</a>
                                     </div>
                                 </div>
 
@@ -68,7 +68,7 @@ include_once '../layouts/head.php';
                                     <div class="card-body">
                                         <h5 class="card-title">Laravel</h5>
                                         <p class="card-text">Some quick example.</p>
-                                        <a href="#" class="btn btn-primary">Enroll Now</a>
+                                        <a href="Sanction Rules/create.php" class="btn btn-primary">Enroll Now</a>
                                     </div>
                                 </div>
                             </div>

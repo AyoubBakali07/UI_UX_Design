@@ -29,7 +29,7 @@ include_once '../../layouts/head.php';
                         <div class="card border-info mt-2">
     <!-- Card Header with toggle functionality -->
     <div class="card-header border-primary bg-light text-info" style="cursor: pointer;" onclick="toggleCardBody('cardBody1')">
-      Card Header 1
+    Maîtrise d'Eloquent ORM
     </div>
 
     <!-- Collapsible Card Body -->
@@ -37,14 +37,14 @@ include_once '../../layouts/head.php';
       <!-- Section 1 -->
       <section class="mb-3 pb-3 border-bottom">
         <div class="d-flex align-items-center justify-content-between">
-          <p class="mb-0">Introduction to Eloquent ORM</p>
+          <p class="mb-0">Tuto4 - Introduction à Eloquent ORM</p>
           <button class="btn btn-primary mr-3" onclick="openEditModal('Introduction to Eloquent ORM')">Edit</button>
         </div>
       </section>
       <!-- Section 2 -->
       <section class="mb-3 pb-3 border-bottom">
         <div class="d-flex align-items-center justify-content-between">
-          <p class="mb-0">Advanced Eloquent Techniques</p>
+          <p class="mb-0">Tuto5 - Migrations et Seeders</p>
           <button class="btn btn-primary mr-3" onclick="openEditModal('Advanced Eloquent Techniques')">Edit</button>
         </div>
       </section>
@@ -54,7 +54,7 @@ include_once '../../layouts/head.php';
   <div class="card border-info mt-2">
     <!-- Card Header with toggle functionality -->
     <div class="card-header border-primary bg-light text-info" style="cursor: pointer;" onclick="toggleCardBody('cardBody2')">
-      Card Header 2
+    Maîtrisez la POO en PHP !
     </div>
 
     <!-- Collapsible Card Body -->
@@ -62,14 +62,14 @@ include_once '../../layouts/head.php';
       <!-- Section 1 -->
       <section class="mb-3 pb-3 border-bottom">
         <div class="d-flex align-items-center justify-content-between">
-          <p class="mb-0">Introduction to Eloquent ORM</p>
+          <p class="mb-0">Concepts de base de la POO</p>
           <button class="btn btn-primary mr-3" onclick="openEditModal('Introduction to Eloquent ORM')">Edit</button>
         </div>
       </section>
       <!-- Section 2 -->
       <section class="mb-3 pb-3 border-bottom">
         <div class="d-flex align-items-center justify-content-between">
-          <p class="mb-0">Advanced Eloquent Techniques</p>
+          <p class="mb-0">Encapsulation</p>
           <button class="btn btn-primary mr-3" onclick="openEditModal('Advanced Eloquent Techniques')">Edit</button>
         </div>
       </section>
