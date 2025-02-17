@@ -39,12 +39,12 @@
                 <p>Formation</p>
               </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a href="/admin/Sanction Rules/index.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Show rules</p>
               </a>
-            </li>
+            </li> -->
           </ul>
         </li>
 

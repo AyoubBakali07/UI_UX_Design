@@ -1,0 +1,37 @@
+classDiagram
+
+namespace PkgAutoformation {
+ class Autoformation
+ class Tutoriel
+ class RealisationAutoformation
+ class RealisationTutoriel
+}
+
+namespace PkgApprenants {
+  class Apprenant
+  class Groupe
+}
+
+namespace PkgCompetences {
+  class Competence
+  class Technologie
+}
+
+class Autoformation {
+    
+
+}
+
+%% enum : Encours, ...
+class RealisationTutoriel{
+    etat : enum
+}
+Apprenant --> RealisationAutoformation
+Apprenant --> RealisationTutoriel
+RealisationTutoriel --> "1" RealisationAutoformation
+RealisationAutoformation --> "1" Autoformation
+Autoformation --> "*" Technologie
+Autoformation --> Tutoriel
+Technologie -->  Competence
+Apprenant --> Groupe
+RealisationTutoriel --> Tutoriel
