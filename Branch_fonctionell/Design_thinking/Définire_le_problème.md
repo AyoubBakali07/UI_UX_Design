@@ -1,9 +1,9 @@
-# Problem Definition
+# Définition du Problème
 
-## Context
-Trainers face challenges in effectively tracking students' progress in self-training programs, particularly in tutorials and projects. Currently, the tools used, such as Google Sheets, are insufficient to provide a clear and structured view.
+## Contexte
+Les formateurs rencontrent des difficultés à suivre efficacement la progression des élèves dans les programmes d’auto-formation, en particulier pour les tutoriels et les projets. Actuellement, les outils utilisés, tels que Google Sheets, sont insuffisants pour fournir une vue claire et structurée.
 
-## Problem
-- Trainers lack clear visibility into individual students' progress.
-- They do not know which students are encountering problems or falling behind.
-- It is difficult to identify the reasons for delays in tutorials or projects.
+## Problème
+- Les formateurs manquent de visibilité claire sur la progression individuelle des élèves.
+- Ils ne savent pas quels élèves rencontrent des problèmes ou prennent du retard.
+- Il est difficile d’identifier les raisons des retards dans les tutoriels ou les projets.

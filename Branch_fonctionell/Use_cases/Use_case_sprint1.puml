@@ -3,7 +3,7 @@ left to right direction
 actor Étudiant
 actor Formateur
 
-rectangle "Sprint 1: Core Functionality for Progress Tracking" {
+rectangle "Sprint 1 : Fonctionnalités de base pour le suivi de progression" {
     usecase "Suivre sa progression" as UC1
     usecase "Visualiser les modules terminés et restants" as UC3
     usecase "Ajouter des liens" as UC9
@@ -15,6 +15,5 @@ rectangle "Sprint 1: Core Functionality for Progress Tracking" {
 Étudiant -- UC9
 
 Formateur -- UC4
-
 
 @enduml

@@ -3,15 +3,12 @@ left to right direction
 actor Étudiant
 actor Formateur
 
-rectangle "Sprint 2: Advanced Features and Automation" {
-    usecase "Modifier ou Supprimer ses liens" as UC8
-
+rectangle "Sprint 2 : Fonctionnalités avancées et automatisation" {
+    usecase "Modifier ou supprimer ses liens" as UC8
     usecase "Fournir des commentaires sur l'avancement" as UC5
 }
 
 Étudiant -- UC8
-
 Formateur -- UC5
-
 
 @enduml
