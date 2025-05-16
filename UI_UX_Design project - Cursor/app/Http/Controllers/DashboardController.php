@@ -65,13 +65,19 @@ class DashboardController extends Controller
                         ->where('status', 'completed')
                         ->count()
                 ];
-            });
+            })
+            ->values() // Convert to a regular array
+            ->all();
 
         // Get struggling students (less than 50% progress)
-        $strugglingStudents = $studentProgress
-            ->where('progress', '<', 50)
+        $strugglingStudents = collect($studentProgress)
+            ->filter(function ($student) {
+                return $student['progress'] < 50;
+            })
             ->sortBy('progress')
-            ->take(5);
+            ->take(5)
+            ->values()
+            ->all();
 
         // Analyze delay reasons
         $delayReasons = [

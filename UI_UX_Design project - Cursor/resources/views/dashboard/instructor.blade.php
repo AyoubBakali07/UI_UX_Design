@@ -22,14 +22,14 @@
                         <tbody>
                             @foreach($studentProgress as $student)
                             <tr class="border-b">
-                                <td class="py-4">{{ $student->nom }} {{ $student->prenom }}</td>
+                                <td class="py-4">{{ $student['nom'] }} {{ $student['prenom'] }}</td>
                                 <td class="py-4">
                                     <div class="w-48 bg-gray-200 rounded-full h-2.5">
-                                        <div class="bg-blue-500 h-2.5 rounded-full" style="width: {{ $student->progress }}%"></div>
+                                        <div class="bg-blue-500 h-2.5 rounded-full" style="width: {{ $student['progress'] }}%"></div>
                                     </div>
                                 </td>
-                                <td class="py-4">{{ $student->completed_tutorials_count }}</td>
-                                <td class="py-4">{{ $student->completed_projects_count }}</td>
+                                <td class="py-4">{{ $student['completed_tutorials_count'] }}</td>
+                                <td class="py-4">{{ $student['completed_projects_count'] }}</td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -57,9 +57,9 @@
                     <div class="space-y-4">
                         @foreach($strugglingStudents as $student)
                         <div class="flex items-center justify-between">
-                            <span class="text-sm text-gray-600">{{ $student->nom }} {{ $student->prenom }}</span>
+                            <span class="text-sm text-gray-600">{{ $student['nom'] }} {{ $student['prenom'] }}</span>
                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                                {{ $student->progress }}%
+                                {{ $student['progress'] }}%
                             </span>
                         </div>
                         @endforeach
