@@ -14,12 +14,11 @@ return new class extends Migration
         Schema::create('tutos', function (Blueprint $table) {
             $table->id();
             $table->string('titre');
+            $table->text('description');
             $table->text('contenu');
-            $table->integer('order');
-            $table->string('progression')->default('En cours'); // Example values: En cours, Terminée, etc.
-            $table->unsignedBigInteger('formation_id')->nullable()->constrained()->cascadeOnDelete();
-
-            $table->foreign('formation_id')->references('id')->on('formations')->onDelete('cascade'); // Assuming 'formations' table has an 'id' column for foreign key reference.
+            $table->integer('duree');
+            $table->foreignId('formation_id')->constrained()->onDelete('cascade');
+            $table->foreignId('autoformation_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

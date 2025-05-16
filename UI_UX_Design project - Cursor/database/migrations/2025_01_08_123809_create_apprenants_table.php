@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('apprenants', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('nom');
+            $table->string('prenom');
             $table->string('email')->unique();
-            $table->string('password');
+            $table->string('telephone');
             $table->timestamps();
         });
     }

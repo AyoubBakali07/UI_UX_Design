@@ -13,8 +13,17 @@ class Apprenant extends Model
         'nom',
         'prenom',
         'email',
-        'telephone'
+        'telephone',
+        'user_id'
     ];
+
+    /**
+     * Get the user that owns the apprenant.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     /**
      * Get the autoformations for the apprenant.
@@ -27,7 +36,7 @@ class Apprenant extends Model
     }
 
     /**
-     * Get the realisations for the apprenant.
+     * Get the realisations (completed projects) for the apprenant.
      */
     public function realisations()
     {

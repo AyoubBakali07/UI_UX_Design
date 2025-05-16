@@ -17,6 +17,9 @@ return new class extends Migration
             $table->text('description');    
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
+            $table->enum('niveau', ['debutant', 'intermediaire', 'avance']);
+            $table->integer('duree');
+            $table->foreignId('formation_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

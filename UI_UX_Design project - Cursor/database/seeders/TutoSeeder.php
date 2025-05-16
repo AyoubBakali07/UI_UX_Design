@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Formation;
 use App\Models\Tuto;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Autoformation;
 use Illuminate\Database\Seeder;
 
 class TutoSeeder extends Seeder
@@ -14,21 +13,36 @@ class TutoSeeder extends Seeder
      */
     public function run(): void
     {
-        $formation = Formation::first();
-        Tuto::create([
-            'titre' => 'Introduction to HTML',
-            'contenu' => 'This tutorial covers the basics of HTML structure.',
-            'order' => 1,
-            'progression' => 'En cours',
-            'formation_id' => $formation->id, // Associate with the formation
+        $autoformations = Autoformation::with('formation')->get();
+        
+        foreach ($autoformations as $autoformation) {
+            $tutorialCount = rand(3, 6); // 3-6 tutorials per autoformation
+            
+            for ($i = 1; $i <= $tutorialCount; $i++) {
+                Tuto::create([
+                    'titre' => "Lesson $i: " . $autoformation->titre,
+                    'description' => "Tutorial lesson $i for " . $autoformation->titre,
+                    'contenu' => $this->generateContent(),
+                    'duree' => rand(30, 120), // 30-120 minutes
+                    'formation_id' => $autoformation->formation_id,
+                    'autoformation_id' => $autoformation->id
+                ]);
+            }
+        }
+    }
 
-        ]);
+    private function generateContent(): string
+    {
+        $paragraphs = [
+            "This lesson covers the fundamental concepts and practical applications.",
+            "We'll explore various techniques and best practices in this tutorial.",
+            "Through hands-on exercises, you'll learn how to implement these concepts.",
+            "By the end of this lesson, you'll be able to create your own solutions.",
+            "Practice exercises and real-world examples are included in this tutorial."
+        ];
 
-        Tuto::create([
-            'titre' => 'CSS Basics',
-            'contenu' => 'Learn how to style your HTML elements with CSS.',
-            'order' => 2,
-            'progression' => 'Terminée',
-        ]);
+        return $paragraphs[array_rand($paragraphs)] . "\n\n" . 
+               $paragraphs[array_rand($paragraphs)] . "\n\n" .
+               $paragraphs[array_rand($paragraphs)];
     }
 }

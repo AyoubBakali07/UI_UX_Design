@@ -3,8 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Apprenant;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class ApprenantSeeder extends Seeder
 {
@@ -13,16 +15,44 @@ class ApprenantSeeder extends Seeder
      */
     public function run(): void
     {
-        Apprenant::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'password' => bcrypt('password123'),
-        ]);
+        $students = [
+            [
+                'nom' => 'Alami',
+                'prenom' => 'Mohammed',
+                'email' => 'mohammed@example.com',
+                'telephone' => '0612345678'
+            ],
+            [
+                'nom' => 'Benani',
+                'prenom' => 'Sara',
+                'email' => 'sara@example.com',
+                'telephone' => '0623456789'
+            ],
+            [
+                'nom' => 'Chraibi',
+                'prenom' => 'Karim',
+                'email' => 'karim@example.com',
+                'telephone' => '0634567890'
+            ]
+        ];
 
-        Apprenant::create([
-            'name' => 'Jane Smith',
-            'email' => 'janesmith@example.com',
-            'password' => bcrypt('password456'),
-        ]);
+        foreach ($students as $student) {
+            // Create user account
+            $user = User::create([
+                'name' => $student['prenom'] . ' ' . $student['nom'],
+                'email' => $student['email'],
+                'password' => Hash::make('password'),
+                'role' => 'student'
+            ]);
+
+            // Create apprenant profile
+            Apprenant::create([
+                'user_id' => $user->id,
+                'nom' => $student['nom'],
+                'prenom' => $student['prenom'],
+                'email' => $student['email'],
+                'telephone' => $student['telephone']
+            ]);
+        }
     }
 }

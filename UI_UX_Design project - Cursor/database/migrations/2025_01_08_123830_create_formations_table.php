@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('titre');
             $table->text('description');
+            $table->enum('niveau', ['debutant', 'intermediaire', 'avance']);
+            $table->foreignId('instructor_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

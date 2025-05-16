@@ -12,7 +12,7 @@
 
 <div>
     @if($label)
-        <label for="{{ $name }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label for="{{ $name }}" class="block text-sm font-medium text-gray-700 mb-1">
             {{ $label }}
             @if($required)
                 <span class="text-red-500">*</span>
@@ -46,7 +46,7 @@
     </div>
 
     @if($helper)
-        <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">{{ $helper }}</p>
+        <p class="mt-2 text-sm text-gray-500">{{ $helper }}</p>
     @endif
 
     @error($name)

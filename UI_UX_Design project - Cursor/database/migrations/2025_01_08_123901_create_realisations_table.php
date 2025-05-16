@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('realisations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('apprenant_id')->constrained()->onDelete('cascade');
             $table->date('date');
-            $table->string('status');
+            $table->enum('status', ['not_started', 'in_progress', 'completed', 'abandoned'])->default('not_started');
             $table->text('commentaire')->nullable();
             $table->unsignedBigInteger('autoformation_id')->nullable();
             $table->unsignedBigInteger('tuto_id')->nullable();

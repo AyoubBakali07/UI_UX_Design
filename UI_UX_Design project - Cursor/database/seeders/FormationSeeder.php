@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Formation;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,14 +14,38 @@ class FormationSeeder extends Seeder
      */
     public function run(): void
     {
-        Formation::create([
-            'titre' => 'Full-Stack Web Development',
-            'description' => 'Learn front-end and back-end web development in this comprehensive course.',
-        ]);
+        $instructors = User::where('role', 'instructor')->get();
+        
+        $formations = [
+            [
+                'titre' => 'Web Development Fundamentals',
+                'description' => 'Learn the basics of web development including HTML, CSS, and JavaScript.',
+                'niveau' => 'debutant'
+            ],
+            [
+                'titre' => 'Advanced JavaScript Programming',
+                'description' => 'Master advanced JavaScript concepts including ES6+, async programming, and design patterns.',
+                'niveau' => 'avance'
+            ],
+            [
+                'titre' => 'PHP & Laravel Development',
+                'description' => 'Learn PHP programming and Laravel framework for building modern web applications.',
+                'niveau' => 'intermediaire'
+            ],
+            [
+                'titre' => 'Frontend Development with React',
+                'description' => 'Build modern user interfaces with React.js and related technologies.',
+                'niveau' => 'intermediaire'
+            ]
+        ];
 
-        Formation::create([
-            'titre' => 'UI/UX Design Bootcamp',
-            'description' => 'Master the art of creating user-friendly interfaces.',
-        ]);
+        foreach ($formations as $formation) {
+            Formation::create([
+                'titre' => $formation['titre'],
+                'description' => $formation['description'],
+                'niveau' => $formation['niveau'],
+                'instructor_id' => $instructors->random()->id
+            ]);
+        }
     }
 }

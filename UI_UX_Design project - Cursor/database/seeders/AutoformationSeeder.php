@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Autoformation;
+use App\Models\Formation;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,18 +14,20 @@ class AutoformationSeeder extends Seeder
      */
     public function run(): void
     {
-        Autoformation::create([
-            'titre' => 'JavaScript Fundamentals',
-            'description' => 'Understand the basics of JavaScript.',
-            'start_date' => '2025-01-01',
-            'end_date' => '2025-03-01',
-        ]);
-
-        Autoformation::create([
-            'titre' => 'Advanced CSS Techniques',
-            'description' => 'Learn advanced CSS skills to build responsive designs.',
-            'start_date' => '2025-02-01',
-            'end_date' => '2025-04-01',
-        ]);
+        $formations = Formation::all();
+        
+        foreach ($formations as $formation) {
+            $autoformationCount = rand(2, 4); // 2-4 autoformations per formation
+            
+            for ($i = 1; $i <= $autoformationCount; $i++) {
+                Autoformation::create([
+                    'titre' => "Module $i: " . $formation->titre,
+                    'description' => "Self-paced module $i for " . $formation->titre,
+                    'niveau' => $formation->niveau,
+                    'duree' => rand(2, 8), // 2-8 hours
+                    'formation_id' => $formation->id
+                ]);
+            }
+        }
     }
 }
