@@ -1,19 +1,19 @@
 @startuml
 left to right direction
 actor Étudiant
-actor Formateur
+' actor Formateur
 
-rectangle "Sprint 1 : Fonctionnalités de base pour le suivi de progression" {
+rectangle "Sprint 2 : Fonctionnalités de base pour le suivi de progression" {
     usecase "Suivre sa progression" as UC1
     usecase "Visualiser les modules terminés et restants" as UC3
     usecase "Ajouter des liens" as UC9
-    usecase "Accéder aux rapports d'avancement" as UC4
+    ' usecase "Accéder aux rapports d'avancement" as UC4
 }
 
 Étudiant -- UC1
 Étudiant -- UC3
 Étudiant -- UC9
 
-Formateur -- UC4
+' Formateur -- UC4
 
 @enduml

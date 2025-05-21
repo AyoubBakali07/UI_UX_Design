@@ -1,0 +1,69 @@
+classDiagram
+
+%% === PkgApprenants ===
+class Apprenants_Apprenant {
+  +int id
+  +string nom
+  +string email
+  +string password
+}
+
+class Apprenants_Groupe {
+  +int id
+  +string nom
+}
+
+%% === PkgAutoformation ===
+class Autoformation_Autoformation {
+  +int id
+  +string titre
+  +string description
+  +date start_date
+  +date end_date
+}
+
+class Autoformation_Tutoriel {
+  +int id
+  +string titre
+  +string contenu
+  +int order
+  +string progression
+}
+
+class Autoformation_RealisationAutoformation {
+  +int id
+  +date date
+  +string status
+  +string commentaire
+}
+
+class Autoformation_RealisationTutoriel {
+  +Etat etat
+}
+
+%% === PkgCompetences ===
+class Competences_Technologie {
+  +int id
+  +string nom
+  +string version
+}
+
+class Competences_Competence {
+  +int id
+  +string nom
+  +string description
+}
+
+%% === Relationships ===
+Apprenants_Apprenant --> Autoformation_RealisationAutoformation : effectue
+Apprenants_Apprenant --> Autoformation_RealisationTutoriel : effectue
+Apprenants_Apprenant --> Apprenants_Groupe : appartient à
+
+Autoformation_RealisationTutoriel --> Autoformation_RealisationAutoformation : lié à
+Autoformation_RealisationAutoformation --> Autoformation_Autoformation : concerne
+
+Autoformation_Autoformation --> Competences_Technologie : utilise
+Competences_Technologie --> Competences_Competence : couvre
+
+Autoformation_Autoformation --> Autoformation_Tutoriel : contient
+Autoformation_RealisationTutoriel --> Autoformation_Tutoriel : réalise
