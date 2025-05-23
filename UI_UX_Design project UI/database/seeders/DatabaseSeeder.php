@@ -21,10 +21,9 @@ class DatabaseSeeder extends Seeder
         ]);
         $this->call([
             ApprenantSeeder::class,
-            FormationSeeder::class,
-            AutoformationSeeder::class,
             TutoSeeder::class,
-            RealisationSeeder::class,
+            AutoformationSeeder::class,
+            // RealisationSeeder::class,
         ]);
     }
 }

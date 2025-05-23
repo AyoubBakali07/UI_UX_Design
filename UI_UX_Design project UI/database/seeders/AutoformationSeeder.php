@@ -14,17 +14,13 @@ class AutoformationSeeder extends Seeder
     public function run(): void
     {
         Autoformation::create([
-            'titre' => 'JavaScript Fundamentals',
-            'description' => 'Understand the basics of JavaScript.',
-            'start_date' => '2025-01-01',
-            'end_date' => '2025-03-01',
+            'title' => 'JavaScript Fundamentals',
+            'tutoriel_id' => 1, // We'll need to create a tutoriel first
         ]);
 
         Autoformation::create([
-            'titre' => 'Advanced CSS Techniques',
-            'description' => 'Learn advanced CSS skills to build responsive designs.',
-            'start_date' => '2025-02-01',
-            'end_date' => '2025-04-01',
+            'title' => 'Advanced CSS Techniques',
+            'tutoriel_id' => 2, // We'll need to create a tutoriel first
         ]);
     }
 }

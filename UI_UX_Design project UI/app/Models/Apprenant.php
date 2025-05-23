@@ -20,4 +20,10 @@ class Apprenant extends Model
     {
         return $this->hasMany(RealisationTutoriel::class);
     }
+
+    // Get all apprenant names
+    public static function getAllNames()
+    {
+        return self::pluck('name');
+    }
 }

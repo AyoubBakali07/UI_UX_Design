@@ -3,19 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Apprenant;
 
 class FormateurDashboardController extends Controller
 {
     public function index()
     {
+        $apprenants = Apprenant::all()->map(function($apprenant){
+            return [
+                'name' => $apprenant->name,
+                 'progress' => rand (30, 80),
+                'tutorials' => rand(4,8),
+                'projects' => rand(0,4),
+    
+            ];
+        });
+     
         // Example data (replace with your own logic or database queries)
-        $apprenants = [
-            ['name' => 'Alice Dupont', 'progress' => 80, 'tutorials' => 8, 'projects' => 2],
-            ['name' => 'Benjamin Lefevre', 'progress' => 60, 'tutorials' => 6, 'projects' => 1],
-            ['name' => 'Chioé Martin', 'progress' => 40, 'tutorials' => 4, 'projects' => 1],
-            ['name' => 'David Bernard', 'progress' => 30, 'tutorials' => 3, 'projects' => 0],
-            ['name' => 'Emma Robert', 'progress' => 90, 'tutorials' => 9, 'projects' => 3],
-        ];
+       
+       
 
         $difficultes = ['David Bernard', 'Chioé Martin'];
 
