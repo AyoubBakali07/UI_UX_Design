@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
             ApprenantSeeder::class,
             TutoSeeder::class,
             AutoformationSeeder::class,
-            // RealisationSeeder::class,
+            RealisationAutoformationSeeder::class,
+            RealisationTutorielSeeder::class,
         ]);
     }
 }

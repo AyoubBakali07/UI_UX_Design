@@ -9,6 +9,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('apprenant_id')->constrained('apprenants')->onDelete('cascade');
             $table->foreignId('autoformation_id')->constrained('autoformations')->onDelete('cascade');
+            $table->enum('status', ['encours', 'termine', 'abandonne']);
             $table->timestamps();
         });
     }

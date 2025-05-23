@@ -12,10 +12,9 @@ class FormateurDashboardController extends Controller
         $apprenants = Apprenant::all()->map(function($apprenant){
             return [
                 'name' => $apprenant->name,
-                 'progress' => rand (30, 80),
-                'tutorials' => rand(4,8),
-                'projects' => rand(0,4),
-    
+                'progress' => rand(30, 80),
+                'tutorials' => $apprenant->realisationTutoriels()->where('etat', 'termine')->count(),
+                'projects' => $apprenant->realisationAutoformations()->where('status', 'termine')->count(),
             ];
         });
      
