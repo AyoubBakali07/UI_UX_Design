@@ -1,0 +1,19 @@
+@startuml
+left to right direction
+actor "Formateur" as Formateur
+
+rectangle Dashboard-Formateur-(sprint-1) {
+  usecase "Accéder au Dashboard Formateur" as UC1
+  usecase "Voir la progression des apprenants" as UC1_1
+  usecase "Voir la distribution de la progression" as UC1_2
+  usecase "Identifier les apprenants en difficulté" as UC1_3
+  usecase "Consulter les causes de retard" as UC1_4
+}
+
+Formateur -- UC1
+
+UC1 <.. UC1_1 : <<extend>>
+UC1 <.. UC1_2 : <<extend>>
+UC1 <.. UC1_3 : <<extend>>
+UC1 <.. UC1_4 : <<extend>>
+@enduml
