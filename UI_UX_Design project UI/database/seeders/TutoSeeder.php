@@ -20,5 +20,29 @@ class TutoSeeder extends Seeder
         Tutoriel::create([
             'title' => 'CSS Basics',
         ]);
+        Tutoriel::create([
+            'title' => 'CSS Basics',
+        ]);
+        Tutoriel::create([
+            'title' => 'CSS Basics',
+        ]);
+        Tutoriel::create([
+            'title' => 'CSS Basics',
+        ]);
+        Tutoriel::create([
+            'title' => 'CSS Basics',
+        ]);
+        Tutoriel::create([
+            'title' => 'CSS Basics',
+        ]);
+        Tutoriel::create([
+            'title' => 'CSS Basics',
+        ]);
+        Tutoriel::create([
+            'title' => 'CSS Basics',
+        ]);
+        Tutoriel::create([
+            'title' => 'CSS Basics',
+        ]);
     }
 }

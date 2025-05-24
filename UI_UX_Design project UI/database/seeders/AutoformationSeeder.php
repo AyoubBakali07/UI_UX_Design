@@ -22,5 +22,37 @@ class AutoformationSeeder extends Seeder
             'title' => 'Advanced CSS Techniques',
             'tutoriel_id' => 2, // We'll need to create a tutoriel first
         ]);
+        Autoformation::create([
+            'title' => 'Advanced CSS Techniques',
+            'tutoriel_id' => 3, // We'll need to create a tutoriel first
+        ]);
+            Autoformation::create([
+                'title' => 'Advanced CSS Techniques',
+                'tutoriel_id' => 4, // We'll need to create a tutoriel first
+            ]);
+            Autoformation::create([
+                'title' => 'Advanced CSS Techniques',
+                'tutoriel_id' => 5, // We'll need to create a tutoriel first
+            ]);
+            Autoformation::create([
+                'title' => 'Advanced CSS Techniques',
+                'tutoriel_id' => 6, // We'll need to create a tutoriel first
+            ]);
+            Autoformation::create([
+                'title' => 'Advanced CSS Techniques',
+                'tutoriel_id' => 7, // We'll need to create a tutoriel first
+            ]);
+            Autoformation::create([
+                'title' => 'Advanced CSS Techniques',
+                'tutoriel_id' => 8, // We'll need to create a tutoriel first
+            ]);
+            Autoformation::create([
+                'title' => 'Advanced CSS Techniques',
+                'tutoriel_id' => 9, // We'll need to create a tutoriel first
+            ]);
+            Autoformation::create([
+                'title' => 'Advanced CSS Techniques',
+                'tutoriel_id' => 10, // We'll need to create a tutoriel first
+            ]);
     }
 }

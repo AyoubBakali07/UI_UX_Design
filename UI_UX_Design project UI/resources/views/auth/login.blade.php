@@ -35,7 +35,7 @@
                                 required autofocus autocomplete="email"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 @error('email') border-red-500 @enderror"
                                 placeholder="student@example.com">
-                            @error('email')
+                                @error('email')
                                 <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
                             @enderror
                         </div>
@@ -46,8 +46,8 @@
                                 placeholder="********">
                             @error('password')
                                 <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
-                            @enderror
-                        </div>
+                                @enderror
+                            </div>
                         <div class="flex items-center">
                             <input class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                             <label class="ml-2 block text-sm text-gray-900" for="remember">
@@ -80,8 +80,8 @@
                                 placeholder="instructor@example.com">
                             @error('email')
                                 <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
-                            @enderror
-                        </div>
+                                @enderror
+                            </div>
                         <div>
                             <label for="password_instructor" class="block text-sm font-medium text-gray-700">Password</label>
                             <input id="password_instructor" type="password" name="password" required autocomplete="current-password"
@@ -95,8 +95,8 @@
                             <input class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" type="checkbox" name="remember" id="remember_instructor" {{ old('remember') ? 'checked' : '' }}>
                             <label class="ml-2 block text-sm text-gray-900" for="remember_instructor">
                                 Remember Me
-                            </label>
-                        </div>
+                                    </label>
+                                </div>
                         <div>
                             <button type="submit" class="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md shadow focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 Login

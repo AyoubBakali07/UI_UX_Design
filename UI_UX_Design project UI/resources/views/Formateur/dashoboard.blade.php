@@ -60,10 +60,10 @@
             </div>
         </div>
     </div>
-    <div class="mt-8 bg-white rounded-lg shadow p-6">
+    <!-- <div class="mt-8 bg-white rounded-lg shadow p-6">
         <h4 class="font-semibold mb-2">Rétroaction</h4>
         <input type="text" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Saisissez votre message">
-    </div>
+    </div> -->
 </div>
 @endsection
 

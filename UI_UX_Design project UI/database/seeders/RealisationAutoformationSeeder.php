@@ -5,35 +5,28 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\RealisationAutoformation;
 use App\Models\Apprenant;
+use App\Models\Autoformation;
 
 class RealisationAutoformationSeeder extends Seeder
 {
     public function run(): void
     {
-        $apprenant1 = Apprenant::first();
-        $apprenant2 = Apprenant::skip(1)->first();
+        $apprenants     = Apprenant::all();
+        $autoformations = Autoformation::all();
 
-        RealisationAutoformation::create([
-            'apprenant_id' => $apprenant1?->id,
-            'autoformation_id' => 1,
-            // 'date' => '2025-01-10',
-            'status' => 'termine',
-            // 'commentaire' => 'Bien fait',
-        ]);
-        RealisationAutoformation::create([
-            'apprenant_id' => $apprenant1?->id,
-            'autoformation_id' => 2,
-            // 'date' => '2025-01-10',
-            'status' => 'termine',
-            // 'commentaire' => 'Bien fait',
-        ]);
+        // Définir les statuts possibles
+        $statuses = ['termine', 'encours'];
 
-        RealisationAutoformation::create([
-            'apprenant_id' => $apprenant2?->id,
-            'autoformation_id' => 2,
-            // 'date' => '2025-01-15',
-            'status' => 'encours',
-            // 'commentaire' => 'En cours',
-        ]);
+        foreach ($apprenants as $apprenant) {
+            foreach ($autoformations as $auto) {
+                RealisationAutoformation::create([
+                    'apprenant_id'     => $apprenant->id,
+                    'autoformation_id' => $auto->id,
+                    'status'           => $statuses[array_rand($statuses)],
+                    'created_at'       => now(),
+                    'updated_at'       => now(),
+                ]);
+            }
+        }
     }
-} 
+}
