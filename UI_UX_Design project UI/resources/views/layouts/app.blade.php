@@ -11,6 +11,7 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
+    
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts and Styles -->
@@ -74,6 +75,7 @@
 
         <div class="flex min-h-screen bg-gray-100">
             <!-- Sidebar -->
+            @if (!in_array(Route::currentRouteName(), ['login', 'register', 'password.request', 'password.reset']))
             <aside class="w-64 bg-white shadow-md p-6 flex flex-col gap-6 min-h-screen">
                 <div class="text-2xl font-bold text-blue-500 mb-8">Espace Formateur</div>
                 <nav class="flex-1">
@@ -111,6 +113,7 @@
                     </ul>
                 </nav>
             </aside>
+            @endif
             <!-- Main Content -->
             <main class="flex-1 py-4 px-8">
                 @yield('content')
