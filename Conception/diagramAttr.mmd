@@ -1,69 +1,75 @@
 classDiagram
+    direction LR
 
-%% === PkgApprenants ===
-class Apprenants_Apprenant {
-  +int id
-  +string nom
-  +string email
-  +string password
-}
+    %% === PkgApprenants ===
+    namespace PkgApprenants {
+        class Apprenant {
+            +id: int
+            +nom: string
+            +email: string
+            +password: string
+        }
 
-class Apprenants_Groupe {
-  +int id
-  +string nom
-}
+        class Groupe {
+            +id: int
+            +nom: string
+        }
+    }
 
-%% === PkgAutoformation ===
-class Autoformation_Autoformation {
-  +int id
-  +string titre
-  +string description
-  +date start_date
-  +date end_date
-}
+    %% === PkgAutoformation ===
+    namespace PkgAutoformation {
+        class Autoformation {
+            +id: int
+            +titre: string
+            +description: text
+            +start_date: date
+            +end_date: date
+        }
 
-class Autoformation_Tutoriel {
-  +int id
-  +string titre
-  +string contenu
-  +int order
-  +string progression
-}
+        class Tutoriel {
+            +id: int
+            +titre: string
+            +contenu: text
+            +ordre: int
+        }
 
-class Autoformation_RealisationAutoformation {
-  +int id
-  +date date
-  +string status
-  +string commentaire
-}
+        class RealisationAutoformation {
+            +id: int
+            +date_realisation: date
+            +statut: string
+            +commentaire: text
+        }
 
-class Autoformation_RealisationTutoriel {
-  +Etat etat
-}
+        class RealisationTutoriel {
+            +id: int
+            +Etat: enum
+        }
+    }
 
-%% === PkgCompetences ===
-class Competences_Technologie {
-  +int id
-  +string nom
-  +string version
-}
+    %% === PkgCompetences ===
+    namespace PkgCompetences {
+        class Competence {
+            +id: int
+            +nom: string
+            +description: text
+        }
 
-class Competences_Competence {
-  +int id
-  +string nom
-  +string description
-}
+        class Technologie {
+            +id: int
+            +nom: string
+            +version: string
+        }
+    }
 
-%% === Relationships ===
-Apprenants_Apprenant --> Autoformation_RealisationAutoformation : effectue
-Apprenants_Apprenant --> Autoformation_RealisationTutoriel : effectue
-Apprenants_Apprenant --> Apprenants_Groupe : appartient à
+    %% === Relationships ===
+    Apprenant --> RealisationAutoformation : effectue
+    Apprenant --> RealisationTutoriel : effectue
+    Apprenant --> Groupe : appartient à
 
-Autoformation_RealisationTutoriel --> Autoformation_RealisationAutoformation : lié à
-Autoformation_RealisationAutoformation --> Autoformation_Autoformation : concerne
+    RealisationTutoriel --> "1" RealisationAutoformation : lié à
+    RealisationAutoformation --> "1" Autoformation : concerne
 
-Autoformation_Autoformation --> Competences_Technologie : utilise
-Competences_Technologie --> Competences_Competence : couvre
-
-Autoformation_Autoformation --> Autoformation_Tutoriel : contient
-Autoformation_RealisationTutoriel --> Autoformation_Tutoriel : réalise
+    Autoformation --> "*" Technologie : utilise
+    Autoformation --> Tutoriel : contient
+    Technologie --> Competence : couvre
+    RealisationTutoriel --> Tutoriel : réalise

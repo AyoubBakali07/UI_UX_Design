@@ -89,15 +89,15 @@
                                 <span>Tableau des apprenants</span>
                             </a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-gray-100 transition-all duration-150">
-                                <!-- Book icon (outline) -->
+                                Book icon (outline)
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4a2 2 0 00-2-2H6a2 2 0 00-2 2v16a2 2 0 002 2h4a2 2 0 002-2v-2m0-12h6a2 2 0 012 2v16a2 2 0 01-2 2h-6" />
                                 </svg>
                                 <span>Gestion des cours</span>
                             </a>
-                        </li>
+                        </li> -->
                         <li>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="m-0 p-0">
                                 @csrf
