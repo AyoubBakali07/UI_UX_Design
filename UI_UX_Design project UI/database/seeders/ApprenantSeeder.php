@@ -22,23 +22,23 @@ class ApprenantSeeder extends Seeder
         ]);
 
         $apprenants = [
-            ['name' => 'Alice Martin', 'email' => 'alice.martin@example.com'],
-            ['name' => 'bob marley', 'email' => 'bob.marley@example.com'],
-            ['name' => 'arthur luther', 'email' => 'arthur.luther@example.com'],
-            ['name' => 'Bob Johnson', 'email' => 'bob.johnson@example.com'],
-            ['name' => 'Clara Wilson', 'email' => 'clara.wilson@example.com'],
-            ['name' => 'David Lee', 'email' => 'david.lee@example.com'],
-            ['name' => 'Eva Brown', 'email' => 'eva.brown@example.com'],
-            ['name' => 'Frank Harris', 'email' => 'frank.harris@example.com'],
-            ['name' => 'Grace Lewis', 'email' => 'grace.lewis@example.com'],
-            ['name' => 'Henry Clark', 'email' => 'henry.clark@example.com'],
+            ['name' => 'Alice Martin', 'email' => 'alicemartin@mail.com'],
+            ['name' => 'bob marley', 'email' => 'bobmarley@mail.com'],
+            ['name' => 'arthur luther', 'email' => 'arthurluther@mail.com'],
+            ['name' => 'Bob Johnson', 'email' => 'bobjohnson@mail.com'],
+            ['name' => 'Clara Wilson', 'email' => 'clarawilson@mail.com'],
+            ['name' => 'David Lee', 'email' => 'davidlee@mail.com'],
+            ['name' => 'Eva Brown', 'email' => 'evabrown@mail.com'],
+            ['name' => 'Frank Harris', 'email' => 'frankharris@mail.com'],
+            ['name' => 'Grace Lewis', 'email' => 'gracelewis@mail.com'],
+            ['name' => 'Henry Clark', 'email' => 'henryclark@mail.com'],
         ];
 
         foreach ($apprenants as $apprenant) {
             Apprenant::create([
                 'name' => $apprenant['name'],
                 'email' => $apprenant['email'],
-                'password' => bcrypt('password'),
+                'password' => bcrypt('password123'),
                 'groupe_id' => $groupeId,
             ]);
         }
