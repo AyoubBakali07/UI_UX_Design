@@ -6,6 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class RealisationTutoriel extends Model
 {
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'apprenant_id',
+        'tutoriel_id',
+        'realisation_autoformation_id',
+        'etat',
+        'notes',
+        'github_link',
+        'project_link',
+        'slide_link'
+    ];
+
     public function apprenant()
     {
         return $this->belongsTo(Apprenant::class);

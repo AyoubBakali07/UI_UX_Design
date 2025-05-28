@@ -21,8 +21,8 @@ class DatabaseSeeder extends Seeder
         ]);
         $this->call([
             ApprenantSeeder::class,
-            TutoSeeder::class,
             AutoformationSeeder::class,
+            TutoSeeder::class,
             RealisationAutoformationSeeder::class,
             RealisationTutorielSeeder::class,
         ]);

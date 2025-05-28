@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ApprenantCourseController;
 
 Route::get('/', function () {
     // return view('welcome');
@@ -10,7 +11,10 @@ Route::get('/', function () {
 });
 Route::get('/formateur/dashboard', [App\Http\Controllers\FormateurDashboardController::class, 'index'])->name('formateur.dashboard');
 Route::get('/Apprenant/dashboard', [App\Http\Controllers\ApprenantDashboardController::class, 'index'])->name('Apprenant.dashboard');
-Route::get('/Apprenant/course/{name}/sections', [App\Http\Controllers\ApprenantCourseController::class, 'sections'])->name('Apprenant.course.sections');
+Route::get('/Apprenant/course/{autoformationId}/sections', [App\Http\Controllers\ApprenantCourseController::class, 'sections'])->name('Apprenant.course.sections');
+
+// Define the route for editing a course section realisation, using tutorialId
+Route::get('/Apprenant/course/{autoformationId}/tutorial/{tutorialId}/edit', [ApprenantCourseController::class, 'editRealisation'])->name('apprenant.course.section.edit');
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 

@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tutoriel extends Model
 {
-    public function autoformations()
+    public function autoformation()
     {
-        return $this->hasMany(Autoformation::class);
+        return $this->belongsTo(Autoformation::class);
     }
     public function realisationTutoriels()
     {
