@@ -115,7 +115,7 @@
             </aside>
             @endif
             <!-- Main Content -->
-            <main class="flex-1 py-4 px-8">
+            <main class="flex-1 py-4 px-8 overflow-x-hidden">
                 @yield('content')
             </main>
         </div>

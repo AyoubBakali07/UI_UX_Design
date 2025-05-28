@@ -3,23 +3,28 @@
 @section('content')
     <div class="mb-8">
         <h2 class="text-xl font-semibold mb-2">Mes Cours</h2>
-        <div class="flex space-x-4 overflow-x-auto pb-2">
-            @foreach ($courses as $course)
-                <div class="min-w-[220px] bg-white rounded-lg shadow p-4 flex-shrink-0">
-                    <div class="font-bold text-lg mb-2">{{ $course['name'] }}</div>
-                    <div class="text-gray-500 mb-2">Début: {{ $course['start'] }}</div>
-                    <div class="mb-2">
-                        <span class="text-blue-600 font-semibold">{{ $course['progress'] }}%</span>
+        {{-- Wrapper for horizontal scrolling --}}
+        <div class="overflow-x-auto">
+            {{-- Flex container for course cards --}}
+            <div class="flex space-x-4 pb-2 flex-nowrap">
+                @foreach ($courses as $course)
+                    {{-- Individual course card item --}}
+                    <div class="min-w-[220px] bg-white rounded-lg shadow p-4 flex-shrink-0">
+                        <div class="font-bold text-lg mb-2">{{ $course['name'] }}</div>
+                        <div class="text-gray-500 mb-2">Début: {{ $course['start'] }}</div>
+                        <div class="mb-2">
+                            <span class="text-blue-600 font-semibold">{{ $course['progress'] }}%</span>
+                        </div>
+                        <div class="h-2.5 bg-gray-200 rounded-full">
+                            <div class="bg-blue-600 h-2.5 rounded-full" style="width: {{ $course['progress'] }}%"></div>
+                        </div>
+                        <a href="{{ url('/Apprenant/course/' . urlencode($course['name']) . '/sections') }}"
+                           class="mt-4 w-full block text-center bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition">
+                            Enroll Now
+                        </a>
                     </div>
-                    <div class="h-2.5 bg-gray-200 rounded-full">
-                        <div class="bg-blue-600 h-2.5 rounded-full" style="width: {{ $course['progress'] }}%"></div>
-                    </div>
-                    <a href="{{ url('/Apprenant/course/' . urlencode($course['name']) . '/sections') }}"
-                       class="mt-4 w-full block text-center bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition">
-                        Enroll Now
-                    </a>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
     </div>
     <h1 class="text-2xl font-bold mb-4">Mes Informations</h1>

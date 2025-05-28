@@ -13,11 +13,13 @@ return new class extends Migration {
         Schema::create('autoformations', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->text('description');
             $table->foreignId('tutoriel_id')->constrained('tutoriels')->onDelete('cascade');
             $table->timestamps();
         });
         Schema::create('autoformation_technologie', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
             $table->foreignId('autoformation_id')->constrained('autoformations')->onDelete('cascade');
             $table->foreignId('technologie_id')->constrained('technologies')->onDelete('cascade');
             $table->timestamps();
