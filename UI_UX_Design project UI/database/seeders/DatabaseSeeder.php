@@ -13,19 +13,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Call seeders in a specific order to respect dependencies
+        $this->call(FormateurSeeder::class);
+        $this->call(ApprenantSeeder::class);
+        // Assuming GroupeSeeder is run by FormateurSeeder or already exists
+        $this->call(AutoformationSeeder::class);
+        $this->call(TutoSeeder::class);
+        $this->call(RealisationAutoformationSeeder::class);
+        $this->call(RealisationTutorielSeeder::class);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@mail.com',
-        ]);
-        $this->call([
-            FormateurSeeder::class,
-            ApprenantSeeder::class,
-            AutoformationSeeder::class,
-            TutoSeeder::class,
-            RealisationAutoformationSeeder::class,
-            RealisationTutorielSeeder::class,
-        ]);
+        // You might also have a default User seeder if needed separately
+        // User::factory(10)->create();
+        // User::factory()->create([
+        //     'name' => 'Test User',\n        //     'email' => 'test@mail.com',
+        // ]);
+
+        // Assuming FormationSeeder is independent if it doesn't have FK dependencies on the above
+        // $this->call(FormationSeeder::class);
     }
 }

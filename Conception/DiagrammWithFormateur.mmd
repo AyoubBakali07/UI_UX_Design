@@ -1,0 +1,98 @@
+classDiagram
+    direction LR
+
+    %% [PkgApprenants]
+    class Apprenant {
+        +id: int
+        +name: string
+        +email: string
+        +password: string
+        +groupe_id: int  // FK
+    }
+
+    class Groupe {
+        +id: int
+        +name: string
+    }
+
+    class Formateur {
+        +id: int
+        +name: string
+        +email: string
+        +password: string
+        +groupe_id: int  // FK
+    }
+
+    %% [PkgCompetences]
+    class Competence {
+        +id: int
+        +name: string
+    }
+
+    class Technologie {
+        +id: int
+        +name: string
+        +competence_id: int  // FK
+    }
+
+    %% [PkgAutoformation]
+    class Autoformation {
+        +id: int
+        +title: string
+        +description: text
+    }
+
+    class Tutoriel {
+        +id: int
+        +title: string
+        +contenu: text
+        +ordre: int
+        +autoformation_id: int  // FK
+    }
+
+    class RealisationAutoformation {
+        +id: int
+        +status: Etat  // enum
+        +apprenant_id: int  // FK
+        +autoformation_id: int  // FK
+    }
+
+    class RealisationTutoriel {
+        +id: int
+        +etat: Etat  // enum
+        +github_link: string
+        +project_link: string
+        +slide_link: string
+        +apprenant_id: int  // FK
+        +realisation_autoformation_id: int  // FK
+        +tutoriel_id: int  // FK
+    }
+
+    class Etat {
+        <<enumeration>>
+        not_started
+        encours
+        termine
+        abandonne
+    }
+
+    %% === Relationships ===
+    Apprenant --> Groupe                           : appartient à
+    Formateur  --> Groupe                           : appartient à
+
+    Formateur  --> Autoformation                    : crée
+    Formateur  --> Tutoriel                         : crée
+
+    Apprenant --> RealisationAutoformation          : effectue
+    Apprenant --> RealisationTutoriel               : effectue
+
+    RealisationAutoformation --> Autoformation      : concerne
+    RealisationTutoriel      --> RealisationAutoformation : lié à
+    RealisationTutoriel      --> Tutoriel           : réalise
+
+    Autoformation "1" *-- "0..*" Tutoriel           : contient
+    Autoformation "1" --> "0..*" Technologie        : utilise
+    Technologie "1" --> Competence                  : couvre
+
+    Formateur  --> RealisationAutoformation         : consulte
+    Formateur  --> RealisationTutoriel              : consulte

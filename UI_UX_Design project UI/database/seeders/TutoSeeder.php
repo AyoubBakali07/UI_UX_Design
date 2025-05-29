@@ -41,12 +41,12 @@ class TutoSeeder extends Seeder
             // Randomly select an autoformation to associate with
             $randomAutoformation = $autoformations->random();
 
-            Tutoriel::create([
+        Tutoriel::create([
                 'title' => $data['title'],
                 'contenu' => $data['contenu'],
                 'ordre' => $data['ordre'],
                 'autoformation_id' => $randomAutoformation->id,
-            ]);
+        ]);
         }
     }
 }

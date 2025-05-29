@@ -5,54 +5,68 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Apprenant;
 use App\Models\Tutoriel;
+use App\Models\Autoformation;
+use Illuminate\Support\Facades\Auth;
+use App\Models\RealisationTutoriel;
+use App\Models\RealisationAutoformation;
 
 class FormateurDashboardController extends Controller
 {
     public function index()
     {
-        // 1) Récupérer le nombre total de tutoriels dans la plate-forme
-        $totalTutoriels = Tutoriel::count();
+        $formateur = Auth::guard('formateur')->user();
+        $formateurGroupId = $formateur->groupe_id;
 
-        // 2) Construire la liste des apprenants avec progression, tutoriels et projets terminés
-        $apprenants = Apprenant::withCount([
-            // count des tutoriels terminés
-            'realisationTutoriels as tutorials' => function ($q) {
-                $q->where('etat', 'termine');
-            },
-            // count des projets (autoformations) terminés
-            'realisationAutoformations as projects' => function ($q) {
-                $q->where('status', 'termine');
-            },
-        ])->get()->map(function ($apprenant) use ($totalTutoriels) {
-            // 3) Calcul de la progression en pourcentage
-            $completed = $apprenant->tutorials;  // alias défini dans withCount
-            $progress = $totalTutoriels > 0
-                ? round(($completed / $totalTutoriels) * 100)
-                : 0;
+        // Get autoformations created by this formateur
+        $formateurAutoformations = Autoformation::where('formateur_id', $formateur->id)->get();
+        $formateurAutoformationIds = $formateurAutoformations->pluck('id');
 
-            return [
-                'name'      => $apprenant->name,      // ou ->name si tu utilises 'name' en base
-                'progress'  => $progress,
-                'tutorials' => $completed,
-                'projects'  => $apprenant->projects,
-            ];
-        });
-        
+        // Get tutorial IDs within those autoformations
+        $formateurTutorialIds = Tutoriel::whereIn('autoformation_id', $formateurAutoformationIds)->pluck('id');
 
-        // 4) Détecter les apprenants en difficulté (< 50%)
+        // Calculate total relevant tutorials for progress calculation
+        $totalRelevantTutoriels = $formateurTutorialIds->count();
+
+        // Get apprenants in the formateur's group
+        $apprenants = Apprenant::where('groupe_id', $formateurGroupId)
+            ->with(['realisationTutoriels', 'realisationAutoformations'])
+            ->get()
+            ->map(function ($apprenant) use ($formateurTutorialIds, $formateurAutoformationIds, $totalRelevantTutoriels) {
+                // Filter realisations relevant to this formateur's autoformations/tutorials
+                $relevantTutorialRealisations = $apprenant->realisationTutoriels->whereIn('tutoriel_id', $formateurTutorialIds);
+                $relevantAutoformationRealisations = $apprenant->realisationAutoformations->whereIn('autoformation_id', $formateurAutoformationIds);
+
+                // Calculate completed tutorials and projects based on relevant realisations
+                $completedRelevantTutorials = $relevantTutorialRealisations->where('etat', 'termine')->count();
+                $completedRelevantProjects = $relevantAutoformationRealisations->where('status', 'termine')->count();
+
+                // Calculate progression
+                $progress = $totalRelevantTutoriels > 0
+                    ? round(($completedRelevantTutorials / $totalRelevantTutoriels) * 100)
+                    : 0;
+
+                return [
+                    'name'      => $apprenant->name,
+                    'progress'  => $progress,
+                    'tutorials' => $completedRelevantTutorials,
+                    'projects'  => $completedRelevantProjects,
+                ];
+            });
+
+        // Filter apprenants in difficulty (progress < 50%) within this group
         $difficultes = $apprenants
             ->where('progress', '<', 50)
             ->pluck('name')
             ->all();
 
-        // 5) Construire la distribution selon les paliers
+        // Build progress distribution for this group
         $distribution = [
             'over_75'      => $apprenants->where('progress', '>', 75)->count(),
             'between_50_75'=> $apprenants->whereBetween('progress', [50, 75])->count(),
             'under_50'     => $apprenants->where('progress', '<', 50)->count(),
         ];
 
-        // 6) Constantes pour la partie "Retards"
+        // Constants for the "Retards" section (these might still be general, or you could filter based on relevant realisations)
         $retards = [
             'Incompréhension contenu',
             'Problèmes techniques',
@@ -60,8 +74,7 @@ class FormateurDashboardController extends Controller
         ];
 
         return view(
-            // formateur/dashboard
-            'Formateur.dashoboard',
+            'Formateur.dashoboard', // Ensure this matches your view file name
             compact('apprenants', 'difficultes', 'retards', 'distribution')
         );
     }
