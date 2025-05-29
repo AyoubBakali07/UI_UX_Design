@@ -44,6 +44,10 @@ return [
             'driver' => 'session',
             'provider' => 'apprenants',
         ],
+        'formateur' => [
+            'driver' => 'session',
+            'provider' => 'formateurs',
+        ],
     ],
 
     /*
@@ -71,6 +75,10 @@ return [
         'apprenants' => [
             'driver' => 'eloquent',
             'model' => App\Models\Apprenant::class,
+        ],
+        'formateurs' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Formateur::class,
         ],
     ],
 
@@ -102,6 +110,12 @@ return [
         ],
         'apprenants' => [
             'provider' => 'apprenants',
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'formateurs' => [
+            'provider' => 'formateurs',
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,

@@ -75,45 +75,59 @@
 
         <div class="flex min-h-screen bg-gray-100">
             <!-- Sidebar -->
-            @if (!in_array(Route::currentRouteName(), ['login', 'register', 'password.request', 'password.reset']))
-            <aside class="w-64 bg-white shadow-md p-6 flex flex-col gap-6 min-h-screen">
-                <div class="text-2xl font-bold text-blue-500 mb-8">Espace Formateur</div>
-                <nav class="flex-1">
-                    <ul class="space-y-2">
-                        <li>
-                            <a href="/formateur/dashboard" class="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 transition-all duration-150">
-                                <!-- User group icon (outline) -->
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-2.13a4 4 0 10-8 0 4 4 0 008 0zm6 2a4 4 0 00-3-3.87" />
-                                </svg>
-                                <span>Tableau des apprenants</span>
-                            </a>
-                        </li>
-                        <!-- <li>
-                            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-gray-100 transition-all duration-150">
-                                Book icon (outline)
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4a2 2 0 00-2-2H6a2 2 0 00-2 2v16a2 2 0 002 2h4a2 2 0 002-2v-2m0-12h6a2 2 0 012 2v16a2 2 0 01-2 2h-6" />
-                                </svg>
-                                <span>Gestion des cours</span>
-                            </a>
-                        </li> -->
-                        <li>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="m-0 p-0">
-                                @csrf
-                                <button type="submit" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-gray-100 transition-all duration-150 w-full text-left">
-                                    <!-- Logout icon (outline) -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2h4a2 2 0 012 2v1" />
+            @auth {{-- Hide sidebar when not authenticated --}}
+                @if (!in_array(Route::currentRouteName(), ['login', 'register', 'password.request', 'password.reset']))
+                <aside class="w-64 bg-white shadow-md p-6 flex flex-col gap-6 min-h-screen">
+                    <div class="text-2xl font-bold text-blue-500 mb-8">
+                        @auth('apprenant')
+                            Espace Apprenant
+                        @endauth
+                        @auth('formateur')
+                            Espace Formateur
+                        @endauth
+                    </div>
+                    <nav class="flex-1">
+                        <ul class="space-y-2">
+                            @auth('formateur') {{-- Only show this link for formateurs --}}
+                            <li>
+                                <a href="{{ route('formateur.dashboard') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 transition-all duration-150">
+                                    <!-- User group icon (outline) -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-2.13a4 4 0 10-8 0 4 4 0 008 0zm6 2a4 4 0 00-3-3.87" />
                                     </svg>
-                                    <span>Déconnexion</span>
-                                </button>
-                            </form>
-                        </li>
-                    </ul>
-                </nav>
-            </aside>
-            @endif
+                                    <span>Tableau des apprenants</span>
+                                </a>
+                            </li>
+                            @endauth
+                            @auth('apprenant') {{-- Only show this link for formateurs --}}
+                            <li>
+                                <a href="{{ route('Apprenant.dashboard') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 transition-all duration-150">
+                                    <!-- User group icon (outline) -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-2.13a4 4 0 10-8 0 4 4 0 008 0zm6 2a4 4 0 00-3-3.87" />
+                                    </svg>
+                                    <span>Tableau de bord</span>
+                                </a>
+                            </li>
+                            @endauth
+                            <li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="m-0 p-0">
+                                    @csrf
+                                    <button type="submit" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-gray-100 transition-all duration-150 w-full text-left">
+                                        <!-- Logout icon (outline) -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2h4a2 2 0 012 2v1" />
+                                        </svg>
+                                        <span>Déconnexion</span>
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </nav>
+                </aside>
+                @endif
+            @endauth {{-- End hide sidebar when not authenticated --}}
+
             <!-- Main Content -->
             <main class="flex-1 py-4 px-8 overflow-x-hidden">
                 @yield('content')

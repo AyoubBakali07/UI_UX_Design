@@ -3,9 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Apprenant;
+use App\Models\Groupe;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class ApprenantSeeder extends Seeder
 {
@@ -14,12 +15,9 @@ class ApprenantSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create a groupe
-        $groupeId = DB::table('groupes')->insertGetId([
-            'name' => 'Groupe A',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        // Get the groupes
+        $dw104 = Groupe::where('name', 'DW104')->first();
+        $dm1 = Groupe::where('name', 'DM1')->first();
 
         $apprenants = [
             ['name' => 'Alice Martin', 'email' => 'alicemartin@mail.com'],
@@ -35,10 +33,13 @@ class ApprenantSeeder extends Seeder
         ];
 
         foreach ($apprenants as $apprenant) {
+            // Randomly assign to either DW104 or DM1
+            $groupeId = rand(0, 1) ? $dw104->id : $dm1->id;
+            
             Apprenant::create([
                 'name' => $apprenant['name'],
                 'email' => $apprenant['email'],
-                'password' => bcrypt('password123'),
+                'password' => Hash::make('password123'),
                 'groupe_id' => $groupeId,
             ]);
         }

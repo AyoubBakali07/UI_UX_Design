@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use App\Models\Apprenant;
+use App\Models\Formateur;
 
 class LoginController extends Controller
 {
@@ -39,7 +40,6 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-        $this->middleware('auth')->only('logout');
     }
 
     /**
@@ -51,17 +51,16 @@ class LoginController extends Controller
 
         $credentials = $request->only('email', 'password');
 
-        // Check if the email exists in the apprenants table
-        if (Apprenant::where('email', $credentials['email'])->exists()) {
-            if (Auth::guard('apprenant')->attempt($credentials, $request->filled('remember'))) {
-                // Login successful as apprenant
-                return redirect()->intended(route('Apprenant.dashboard'));
+        // Try formateur login first
+        if (Formateur::where('email', $credentials['email'])->exists()) {
+            if (Auth::guard('formateur')->attempt($credentials, $request->filled('remember'))) {
+                return redirect()->intended(route('formateur.dashboard'));
             }
-        } else {
-            // Try default login (web guard)
-            if (Auth::guard('web')->attempt($credentials, $request->filled('remember'))) {
-                // Login successful as formateur (or default user)
-                return redirect()->intended($this->redirectTo);
+        }
+        // Then try apprenant login
+        elseif (Apprenant::where('email', $credentials['email'])->exists()) {
+            if (Auth::guard('apprenant')->attempt($credentials, $request->filled('remember'))) {
+                return redirect()->intended(route('Apprenant.dashboard'));
             }
         }
 
@@ -76,11 +75,26 @@ class LoginController extends Controller
      */
     protected function authenticated($request, $user)
     {
-        // Check if the email exists in the Apprenant table
-        if (Apprenant::where('email', $user->email)->exists()) {
+        if (Auth::guard('formateur')->check()) {
+            return redirect()->route('formateur.dashboard');
+        }
+        if (Auth::guard('apprenant')->check()) {
             return redirect()->route('Apprenant.dashboard');
         }
-        // Otherwise, redirect to formateur dashboard
-        return redirect()->route('formateur.dashboard');
+    }
+
+    public function logout(Request $request)
+    {
+        if (Auth::guard('formateur')->check()) {
+            Auth::guard('formateur')->logout();
+        }
+        if (Auth::guard('apprenant')->check()) {
+            Auth::guard('apprenant')->logout();
+        }
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 }
