@@ -68,6 +68,8 @@ class ApprenantDashboardController extends Controller
                 'name'     => $autoformation->title,
                 'start'    => $startDate,
                 'progress' => $progress,
+                'total_tutoriels' => $totalTutorielsInAutoformation,
+                'completed_tutoriels' => $completedTutoriels,
                 // You might still want the overall status of the autoformation here if needed
                 'status'   => $realisationAutoformation->status ?? 'not_started', // Assuming RealisationAutoformation has a status field
             ];
