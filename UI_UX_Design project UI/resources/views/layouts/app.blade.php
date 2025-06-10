@@ -101,7 +101,16 @@
                             @endauth
                             @auth('apprenant') {{-- Only show this link for formateurs --}}
                             <li>
-                                <a href="{{ route('Apprenant.dashboard') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 transition-all duration-150">
+                                <a href="{{ route('Apprenant.courses.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-blue-600  hover:bg-blue-100 transition-all duration-150">
+                                    <!-- Book icon (outline) -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.5v11M17.5 10L22 14.5M2 14.5l4.5-4.5M10.5 5.5L15 10m-4.5 9L9 16m9.5 0l4.5-4.5"/>
+                                    </svg>
+                                    <span>Toutes les Formations</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('Apprenant.dashboard') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-blue-600  hover:bg-blue-100 transition-all duration-150">
                                     <!-- User group icon (outline) -->
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-2.13a4 4 0 10-8 0 4 4 0 008 0zm6 2a4 4 0 00-3-3.87" />

@@ -17,9 +17,10 @@
                 <div class="mb-4">
                     <label for="status" class="block text-gray-700 text-sm font-bold mb-2">Status:</label>
                     <select name="status" id="status" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                        <option value="not_started" {{ $realisation->etat == 'not_started' ? 'selected' : '' }}>Not Started</option>
-                        <option value="encours" {{ $realisation->etat == 'encours' ? 'selected' : '' }}>In Progress</option>
-                        <option value="termine" {{ $realisation->etat == 'termine' ? 'selected' : '' }}>Completed</option>
+                        <option value="Non commencé" {{ $realisation->etat == 'Non commencé' ? 'selected' : '' }}>Non commencé</option>
+                        <option value="En cours" {{ $realisation->etat == 'En cours' ? 'selected' : '' }}>En cours</option>
+                        <option value="Terminé" {{ $realisation->etat == 'Terminé' ? 'selected' : '' }}>Terminé</option>
+                        <option value="Abandonné" {{ $realisation->etat == 'Abandonné' ? 'selected' : '' }}>Abandonné</option>
                     </select>
                 </div>
 

@@ -15,67 +15,50 @@ class ApprenantDashboardController extends Controller
         $this->middleware('auth:apprenant');
     }
 
-    public function index()
+    public function index($autoformationId = null)
     {
         // Get the authenticated apprenant
         $apprenant = Auth::user();
 
-        // Fetch all Autoformations to display as "Mes Cours" (using the correct relationship name)
-        $autoformations = Autoformation::with('tutoriels')->get();
+        $query = RealisationTutoriel::where('apprenant_id', $apprenant->id);
+        $autoformation = null;
 
-        // Fetch the student's in-progress tutorial realisations for "Mes Informations"
-        $realisationTutorielsInProgress = RealisationTutoriel::where('apprenant_id', $apprenant->id)
-            ->where('etat', 'encours')
-            ->with('tutoriel.autoformation') // Eager load tutorial and its autoformation
+        if ($autoformationId) {
+            $autoformation = Autoformation::findOrFail($autoformationId);
+            $query->whereHas('tutoriel', function ($q) use ($autoformationId) {
+                $q->where('autoformation_id', $autoformationId);
+            });
+        }
+
+        $realisationTutorielsInProgress = (clone $query)
+            ->with('tutoriel.autoformation')
             ->get();
+
+        // $realisationTutorielsInProgress = (clone $query)->where('etat', 'termine')
+        //     ->with('tutoriel.autoformation')
+        //     ->get();
 
         // Prepare data for the "Mes Informations" table
         $inProgressTutorials = $realisationTutorielsInProgress->map(function ($realisation) {
             return [
-                'id'       => $realisation->tutoriel->id, // Tutorial ID
-                'name'     => $realisation->tutoriel->title, // Tutorial Title
-                'start'    => $realisation->created_at->format('M d, Y'), // Realisation start date
-                'status'   => $realisation->etat, // Realisation status
-                'autoformation_name' => $realisation->tutoriel->autoformation->title, // Autoformation Title
+                'id'       => $realisation->tutoriel->id,
+                'name'     => $realisation->tutoriel->title,
+                'start'    => $realisation->created_at->format('M d, Y'),
+                'status'   => $realisation->etat,
+                'autoformation_name' => $realisation->tutoriel->autoformation->title,
             ];
         });
 
-        // Prepare data for the "Mes Cours" section (still all autoformations)
-        $allCourses = $autoformations->map(function ($autoformation) use ($apprenant) {
-            // Fetch the student's realisations for tutorials within this autoformation
-            $realisationTutorielsForAutoformation = $apprenant->realisationTutoriels()
-                ->whereIn('tutoriel_id', $autoformation->tutoriels->pluck('id'))
-                ->get();
+        // Calculate progress metrics based on the query
+        $totalTutoriels = $query->count();
+        $completedTutoriels = (clone $query)->where('etat', 'termine')->count();
 
-            // Calculate progress
-            $totalTutorielsInAutoformation = $autoformation->tutoriels->count();
-            $completedTutoriels = $realisationTutorielsForAutoformation->where('etat', 'termine')->count();
+        $progress = 0;
+        if ($totalTutoriels > 0) {
+            $progress = round(($completedTutoriels / $totalTutoriels) * 100);
+        }
 
-            $progress = 0;
-            if ($totalTutorielsInAutoformation > 0) {
-                $progress = round(($completedTutoriels / $totalTutorielsInAutoformation) * 100);
-            }
-
-            // Get the start date from RealisationAutoformation if it exists
-            $startDate = 'N/A';
-            $realisationAutoformation = $apprenant->realisationAutoformations->where('autoformation_id', $autoformation->id)->first();
-            if ($realisationAutoformation) {
-                $startDate = $realisationAutoformation->created_at->format('M d, Y');
-            }
-
-            return [
-                'id'       => $autoformation->id,
-                'name'     => $autoformation->title,
-                'start'    => $startDate,
-                'progress' => $progress,
-                'total_tutoriels' => $totalTutorielsInAutoformation,
-                'completed_tutoriels' => $completedTutoriels,
-                // You might still want the overall status of the autoformation here if needed
-                'status'   => $realisationAutoformation->status ?? 'not_started', // Assuming RealisationAutoformation has a status field
-            ];
-        });
-
-        // Pass both datasets to the view
-        return view('Apprenant.dashboard', compact('allCourses', 'inProgressTutorials'));
+        // Pass data to the view
+        return view('Apprenant.dashboard', compact('inProgressTutorials', 'progress', 'completedTutoriels', 'totalTutoriels', 'autoformation', 'autoformationId'));
     }
 } 

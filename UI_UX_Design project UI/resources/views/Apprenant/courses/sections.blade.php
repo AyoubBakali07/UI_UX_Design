@@ -54,10 +54,10 @@
                         <div class="mb-4">
                             <label for="modalStatus" class="block text-gray-700 text-sm font-bold mb-2">Status:</label>
                             <select name="status" id="modalStatus" class=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                                <option value="not_started">Not Started</option>
-                                <option value="encours">In Progress</option>
-                                <option value="termine">Completed</option>
-                                <option value="abandonne">Abandoned</option>
+                                <option value="Non commencé">Non commencé</option>
+                                <option value="En cours">En cours</option>
+                                <option value="Terminé">Terminé</option>
+                                <option value="Abandonné">Abandonné</option>
                             </select>
                         </div>
 

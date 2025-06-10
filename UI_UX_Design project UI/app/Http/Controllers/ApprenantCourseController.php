@@ -18,6 +18,17 @@ class ApprenantCourseController extends Controller
     }
 
     /**
+     * Display a listing of all courses.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index()
+    {
+        $allCourses = Autoformation::all();
+        return view('Apprenant.courses.index', compact('allCourses'));
+    }
+
+    /**
      * Display the sections and lectures for a given Autoformation.
      *
      * @param  int  $autoformationId
@@ -82,7 +93,7 @@ class ApprenantCourseController extends Controller
         // Find or create the RealisationAutoformation for this student and autoformation
         $realisationAutoformation = RealisationAutoformation::firstOrCreate(
             ['apprenant_id' => $apprenant->id, 'autoformation_id' => $autoformationId],
-            ['status' => 'encours'] // Set a default status if creating
+            ['status' => 'En cours'] // Set a default status if creating
         );
 
         // Find or create the RealisationTutoriel for this specific tutorial
@@ -92,7 +103,7 @@ class ApprenantCourseController extends Controller
                 'tutoriel_id' => $tutorialId,
                 'apprenant_id' => $apprenant->id // Add apprenant_id here
             ],
-            ['etat' => 'not_started'] // Set a default status if creating
+            ['etat' => 'Non commencé'] // Set a default status if creating
         );
 
         // Load the related Tutoriel and Autoformation for the view
@@ -113,7 +124,7 @@ class ApprenantCourseController extends Controller
     {
         $validated = $request->validate([
             'tutorial_id' => 'required|exists:tutoriels,id',
-            'etat' => 'required|in:not_started,encours,termine,abandonne',
+            'etat' => 'required|in:Non commencé,En cours,Terminé,Abandonné',
             'notes' => 'nullable|string',
             'github_link' => 'nullable|url',
                 // 'project_link' => 'nullable|url',
@@ -130,7 +141,7 @@ class ApprenantCourseController extends Controller
         // Find or create the RealisationAutoformation for this student and autoformation
         $realisationAutoformation = RealisationAutoformation::firstOrCreate(
             ['apprenant_id' => $apprenant->id, 'autoformation_id' => $autoformationId],
-            ['status' => 'encours'] // Set a default status if creating
+            ['status' => 'En cours'] // Set a default status if creating
         );
 
         // Create the RealisationTutoriel, linking it to the RealisationAutoformation
@@ -152,7 +163,7 @@ class ApprenantCourseController extends Controller
         $realisation = RealisationTutoriel::findOrFail($realisationId);
 
         $validated = $request->validate([
-            'etat' => 'required|in:not_started,encours,termine,abandonne',
+            'etat' => 'required|in:Non commencé,En cours,Terminé,Abandonné',
             'notes' => 'nullable|string',
             'github_link' => 'nullable|url',
             // 'project_link' => 'nullable|url',

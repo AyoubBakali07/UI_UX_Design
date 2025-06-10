@@ -15,7 +15,7 @@ class RealisationAutoformationSeeder extends Seeder
         $autoformations = Autoformation::all();
 
         // Définir les statuts possibles
-        $statuses = ['termine', 'encours'];
+        $statuses = ['Terminé', 'En cours'];
 
         foreach ($apprenants as $apprenant) {
             foreach ($autoformations as $auto) {

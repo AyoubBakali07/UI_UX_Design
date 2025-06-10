@@ -24,7 +24,7 @@ class RealisationTutorielSeeder extends Seeder
                 $realAutoRecords[] = RealisationAutoformation::create([
                     'apprenant_id'     => $apprenant->id,
                     'autoformation_id' => $auto->id,
-                    'status'           => 'encours',
+                    'status'           => 'En cours',
                     'created_at'       => now(),
                     'updated_at'       => now(),
                 ]);
@@ -44,7 +44,7 @@ class RealisationTutorielSeeder extends Seeder
                     'apprenant_id'                 => $apprenant->id,
                     'realisation_autoformation_id' => $realAuto->id,
                     'tutoriel_id'                  => $tuto->id,
-                    'etat'                         => 'termine',
+                    'etat'                         => 'Terminé',
                     'created_at'                   => now(),
                     'updated_at'                   => now(),
                 ]);
@@ -60,7 +60,7 @@ class RealisationTutorielSeeder extends Seeder
                         'apprenant_id'                 => $apprenant->id,
                         'realisation_autoformation_id' => $realAutoRecords[array_rand($realAutoRecords)]->id,
                         'tutoriel_id'                  => $tuto->id,
-                        'etat'                         => 'encours',
+                        'etat'                         => 'En cours',
                         'created_at'                   => now(),
                         'updated_at'                   => now(),
                     ]);

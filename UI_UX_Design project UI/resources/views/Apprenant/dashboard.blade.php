@@ -1,31 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="mb-8">
-        <h2 class="text-xl font-semibold mb-2">Mes Cours</h2>
-        {{-- Wrapper for horizontal scrolling --}}
-        <div class="overflow-x-auto">
-            {{-- Flex container for course cards --}}
-            <div class="flex space-x-4 pb-2 flex-nowrap">
-                @foreach ($allCourses as $autoformation)
-                    {{-- Individual course card item --}}
-                <div class="min-w-[220px] bg-white rounded-lg shadow p-4 flex-shrink-0">
-                        <div class="font-bold text-lg mb-2">{{ $autoformation['name'] }}</div>
-                        <div class="text-gray-500 mb-2">Début: {{ $autoformation['start'] }}</div>
-                    <div class="mb-2">
-                            <span class="text-blue-600 font-semibold">{{ $autoformation['progress'] }}%</span>
-                    </div>
-                    <div class="h-2.5 bg-gray-200 rounded-full">
-                            <div class="bg-blue-600 h-2.5 rounded-full" style="width: {{ $autoformation['progress'] }}%"></div>
-                    </div>
-                        <div class="text-gray-500 mt-2">{{ $autoformation['completed_tutoriels'] }} sur {{ $autoformation['total_tutoriels'] }} tutoriels complétés</div>
-                        <a href="{{ route('Apprenant.course.sections', ['autoformationId' => $autoformation['id']]) }}"
-                       class="mt-4 w-full block text-center bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition">
-                       Démarrer
-                    </a>
-                </div>
-            @endforeach
-            </div>
+    <div class="bg-white rounded-lg  p-6 mb-8">
+        <h2 class="text-xl font-semibold mb-4">
+            @if(isset($autoformation))
+                Progression pour {{ $autoformation->title }}
+            @else
+                Ma progression globale
+            @endif
+        </h2>
+        <div class="h-3 bg-gray-200 rounded-full mb-2">
+            <div class="bg-blue-500 h-full rounded-full" style="width: {{ $progress }}%;"></div>
+        </div>
+        <div class="flex justify-between text-gray-600 text-sm">
+            <span>{{ $completedTutoriels }} sur {{ $totalTutoriels }} tutoriels complétés</span>
+            <span class="font-semibold text-blue-600">{{ $progress }}%</span>
         </div>
     </div>
     <h1 class="text-2xl font-bold mb-4">Mes Informations</h1>
@@ -63,11 +52,25 @@
                         <div class="text-sm text-gray-500">{{ $tutorial['start'] }}</div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-500">{{ $tutorial['status'] }}</div>
+                        <div class="flex items-center text-sm text-gray-500">
+                            @if ($tutorial['status'] == 'Terminé')
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                </svg>
+                                Terminé
+                            @elseif ($tutorial['status'] == 'En cours')
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-orange-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                En cours
+                            @else
+                                {{ $tutorial['status'] }}
+                            @endif
+                        </div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-center">
                         <a href="https://www.w3schools.com/" target="_blank" class="inline-block p-2 rounded hover:bg-gray-100">
-                            <svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5 inline' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M14 3h7v7m0 0L10 21l-7-7 11-11z'/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
                         </a>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-center">

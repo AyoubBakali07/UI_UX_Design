@@ -10,10 +10,10 @@ return new class extends Migration {
             $table->foreignId('apprenant_id')->constrained('apprenants')->onDelete('cascade');
             $table->foreignId('realisation_autoformation_id')->constrained('realisation_autoformations')->onDelete('cascade');
             $table->foreignId('tutoriel_id')->constrained('tutoriels')->onDelete('cascade');
-            $table->enum('etat', ['not_started', 'encours', 'termine', 'abandonne']);
+            $table->enum('etat', ['Non commencé', 'En cours', 'Terminé', 'Abandonné']);
             $table->string('github_link')->nullable();
-            $table->string('project_link')->nullable();
-            $table->string('slide_link')->nullable();
+            // $table->string('project_link')->nullable();
+            // $table->string('slide_link')->nullable();
             $table->timestamps();
         });
     }
