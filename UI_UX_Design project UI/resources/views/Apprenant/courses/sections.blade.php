@@ -53,7 +53,7 @@
                         {{-- Status Field --}}
                         <div class="mb-4">
                             <label for="modalStatus" class="block text-gray-700 text-sm font-bold mb-2">Status:</label>
-                            <select name="status" id="modalStatus" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <select name="status" id="modalStatus" class=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                                 <option value="not_started">Not Started</option>
                                 <option value="encours">In Progress</option>
                                 <option value="termine">Completed</option>
@@ -64,20 +64,20 @@
                         {{-- GitHub Link Field --}}
                         <div class="mb-4">
                             <label for="modalGithubLink" class="block text-gray-700 text-sm font-bold mb-2">Lien GitHub:</label>
-                            <input type="text" name="github_link" id="modalGithubLink" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <input type="text" name="github_link" id="modalGithubLink" class=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                         </div>
 
                         {{-- Project Link Field --}}
-                        <div class="mb-4">
+                        <!-- <div class="mb-4">
                             <label for="modalProjectLink" class="block text-gray-700 text-sm font-bold mb-2">Lien du projet:</label>
-                            <input type="text" name="project_link" id="modalProjectLink" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                        </div>
+                            <input type="text" name="project_link" id="modalProjectLink" class=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight ">
+                        </div> -->
 
                         {{-- Slide Link Field --}}
-                        <div class="mb-4">
+                        <!-- <div class="mb-4">
                             <label for="modalSlideLink" class="block text-gray-700 text-sm font-bold mb-2">Lien des Slide:</label>
-                            <input type="text" name="slide_link" id="modalSlideLink" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                        </div>
+                            <input type="text" name="slide_link" id="modalSlideLink" class=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        </div> -->
 
                         <div class="items-center px-4 py-3">
                             <button type="submit" class="px-4 py-2 bg-blue-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300">

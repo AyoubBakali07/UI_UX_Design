@@ -100,14 +100,14 @@
                     <label class="block text-gray-700 mb-1">Lien GitHub</label>
                     <input type="url" x-model="tutorial.github" class="w-full border rounded px-3 py-2" placeholder="https://github.com/username/repo">
                 </div>
-                <div class="mb-4">
+                <!-- <div class="mb-4">
                     <label class="block text-gray-700 mb-1">Lien du projet</label>
                     <input type="url" x-model="tutorial.project" class="w-full border rounded px-3 py-2" placeholder="https://mon-projet.com">
-                </div>
-                <div class="mb-4">
+                </div> -->
+                <!-- <div class="mb-4">
                     <label class="block text-gray-700 mb-1">Lien des slides</label>
                     <input type="url" x-model="tutorial.slides" class="w-full border rounded px-3 py-2" placeholder="https://slides.com/presentation">
-                </div>
+                </div> -->
                 <div class="flex justify-end space-x-2">
                     <button type="button" @click="close" class="px-4 py-2 rounded border border-gray-300 bg-white text-gray-700">Annuler</button>
                     <button type="submit" class="px-4 py-2 rounded bg-blue-600 text-white">Enregistrer</button>

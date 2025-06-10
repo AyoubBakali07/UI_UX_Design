@@ -18,8 +18,8 @@ class RealisationTutoriel extends Model
         'etat',
         'notes',
         'github_link',
-        'project_link',
-        'slide_link'
+        // 'project_link',
+        // 'slide_link'
     ];
 
     public function apprenant()

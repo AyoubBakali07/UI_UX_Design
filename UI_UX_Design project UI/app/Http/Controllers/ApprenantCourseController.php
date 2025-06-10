@@ -57,8 +57,8 @@ class ApprenantCourseController extends Controller
                 'ordre'           => $tutoriel->ordre ?? null, // Assuming Tutoriel model has an 'ordre' attribute
                 'etat'            => $realisation->etat ?? 'not_started', // Default status if no realisation found
                 'github_link'     => $realisation->github_link ?? null,
-                'project_link'    => $realisation->project_link ?? null,
-                'slide_link'      => $realisation->slide_link ?? null,
+                // 'project_link'    => $realisation->project_link ?? null,
+                // 'slide_link'      => $realisation->slide_link ?? null,
                 // Add an editable flag if needed, based on status or user role
                 // 'editable'      => $realisation ? ($realisation->etat === 'encours') : false,
             ];
@@ -116,8 +116,8 @@ class ApprenantCourseController extends Controller
             'etat' => 'required|in:not_started,encours,termine,abandonne',
             'notes' => 'nullable|string',
             'github_link' => 'nullable|url',
-            'project_link' => 'nullable|url',
-            'slide_link' => 'nullable|url'
+                // 'project_link' => 'nullable|url',
+                // 'slide_link' => 'nullable|url'
         ]);
 
         $apprenant = Auth::user();
@@ -140,8 +140,8 @@ class ApprenantCourseController extends Controller
             'tutoriel_id' => $tutorialId,
             'etat' => $validated['etat'],
             'github_link' => $validated['github_link'] ?? null,
-            'project_link' => $validated['project_link'] ?? null,
-            'slide_link' => $validated['slide_link'] ?? null
+            // 'project_link' => $validated['project_link'] ?? null,
+            // 'slide_link' => $validated['slide_link'] ?? null
         ]);
 
         return response()->json($realisation, 201);
@@ -155,8 +155,8 @@ class ApprenantCourseController extends Controller
             'etat' => 'required|in:not_started,encours,termine,abandonne',
             'notes' => 'nullable|string',
             'github_link' => 'nullable|url',
-            'project_link' => 'nullable|url',
-            'slide_link' => 'nullable|url'
+            // 'project_link' => 'nullable|url',
+            // 'slide_link' => 'nullable|url'
         ]);
 
         $realisation->update($validated);
