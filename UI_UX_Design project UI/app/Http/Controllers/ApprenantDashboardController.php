@@ -18,40 +18,56 @@ class ApprenantDashboardController extends Controller
     public function index($autoformationId = null)
     {
         // Get the authenticated apprenant
-        $apprenant = Auth::user();
-
-        $query = RealisationTutoriel::where('apprenant_id', $apprenant->id);
+        $apprenant = Auth::guard('apprenant')->user();
         $autoformation = null;
 
+        // Get all tutorials for the apprenant (even if not started)
         if ($autoformationId) {
-            $autoformation = Autoformation::findOrFail($autoformationId);
-            $query->whereHas('tutoriel', function ($q) use ($autoformationId) {
-                $q->where('autoformation_id', $autoformationId);
-            });
+            $autoformation = Autoformation::with('tutoriels')->findOrFail($autoformationId);
+            $tutoriels = $autoformation->tutoriels;
+        } else {
+            $tutoriels = \App\Models\Tutoriel::with('autoformation')->get();
         }
 
-        $realisationTutorielsInProgress = (clone $query)
-            ->with('tutoriel.autoformation')
-            ->get();
-
-        // $realisationTutorielsInProgress = (clone $query)->where('etat', 'termine')
-        //     ->with('tutoriel.autoformation')
-        //     ->get();
-
-        // Prepare data for the "Mes Informations" table
-        $inProgressTutorials = $realisationTutorielsInProgress->map(function ($realisation) {
-            return [
-                'id'       => $realisation->tutoriel->id,
-                'name'     => $realisation->tutoriel->title,
-                'start'    => $realisation->created_at->format('M d, Y'),
-                'status'   => $realisation->etat,
-                'autoformation_name' => $realisation->tutoriel->autoformation->title,
-            ];
+        $inProgressTutorials = $tutoriels->map(function ($tutoriel) use ($apprenant) {
+            $realisation = \App\Models\RealisationTutoriel::where('apprenant_id', $apprenant->id)
+                ->where('tutoriel_id', $tutoriel->id)
+                ->first();
+            if ($realisation) {
+                return [
+                    'id'       => $tutoriel->id,
+                    'realisation_id' => $realisation->id,
+                    'name'     => $tutoriel->title,
+                    'start'    => $realisation->created_at ? $realisation->created_at->format('M d, Y') : '',
+                    'status'   => $realisation->etat,
+                    'autoformation_name' => $tutoriel->autoformation->title,
+                    'github'   => $realisation->github_link ?? '',
+                ];
+            } else {
+                return [
+                    'id'       => $tutoriel->id,
+                    'realisation_id' => null,
+                    'name'     => $tutoriel->title,
+                    'start'    => '',
+                    'status'   => 'Non commencé',
+                    'autoformation_name' => $tutoriel->autoformation->title,
+                    'github'   => '',
+                ];
+            }
         });
 
-        // Calculate progress metrics based on the query
-        $totalTutoriels = $query->count();
-        $completedTutoriels = (clone $query)->where('etat', 'termine')->count();
+        // Calculate progress metrics based on new logic
+        $totalTutoriels = $tutoriels->count();
+        $completedTutoriels = 0;
+        foreach ($tutoriels as $tutoriel) {
+            $realisation = \App\Models\RealisationTutoriel::where('apprenant_id', $apprenant->id)
+                ->where('tutoriel_id', $tutoriel->id)
+                ->where('etat', 'Terminé')
+                ->first();
+            if ($realisation) {
+                $completedTutoriels++;
+            }
+        }
 
         $progress = 0;
         if ($totalTutoriels > 0) {

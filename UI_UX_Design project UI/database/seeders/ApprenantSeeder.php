@@ -39,7 +39,7 @@ class ApprenantSeeder extends Seeder
             Apprenant::create([
                 'name' => $apprenant['name'],
                 'email' => $apprenant['email'],
-                'password' => Hash::make('password123'),
+                'password' => Hash::make('password'),
                 'groupe_id' => $groupeId,
             ]);
         }

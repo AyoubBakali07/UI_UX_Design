@@ -36,19 +36,19 @@ class RealisationTutorielSeeder extends Seeder
 
             $tutorielsTermine = $tutoriels->random($numTermine);
 
-            foreach ($tutorielsTermine as $tuto) {
-                // pick one of the realAutoRecords at random (or map 1:1 if you prefer)
-                $realAuto = $realAutoRecords[array_rand($realAutoRecords)];
-
-                RealisationTutoriel::create([
-                    'apprenant_id'                 => $apprenant->id,
-                    'realisation_autoformation_id' => $realAuto->id,
-                    'tutoriel_id'                  => $tuto->id,
-                    'etat'                         => 'Terminé',
-                    'created_at'                   => now(),
-                    'updated_at'                   => now(),
-                ]);
-            }
+           foreach ($tutorielsTermine as $tuto) {
+               // pick one of the realAutoRecords at random (or map 1:1 if you prefer)
+               $realAuto = $realAutoRecords[array_rand($realAutoRecords)];
+               RealisationTutoriel::create([
+                   'apprenant_id' => $apprenant->id,
+                   'tutoriel_id' => $tuto->id,
+                   'realisation_autoformation_id' => $realAuto->id,
+                   'etat' => 'Terminé', // <-- FIXED VALUE
+                   'github_link' => null,
+                   'created_at' => now(),
+                   'updated_at' => now(),
+               ]);
+           }
 
             // 3) (Optional) If you want, you can also mark some tutoriels as "encours" or "abandonne"
             //    by subtracting $tutorielsTermine from the full list:

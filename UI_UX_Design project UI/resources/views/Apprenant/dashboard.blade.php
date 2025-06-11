@@ -52,19 +52,22 @@
                         <div class="text-sm text-gray-500">{{ $tutorial['start'] }}</div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="flex items-center text-sm text-gray-500">
-                            @if ($tutorial['status'] == 'Terminé')
+                        <div class="flex items-center text-sm">
+                            @if ($tutorial['status'] === 'Terminé')
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                                 </svg>
                                 Terminé
-                            @elseif ($tutorial['status'] == 'En cours')
+                            @elseif ($tutorial['status'] === 'En cours')
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-orange-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                                 En cours
                             @else
-                                {{ $tutorial['status'] }}
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                                </svg>
+                                Non commencé
                             @endif
                         </div>
                     </td>
@@ -74,10 +77,17 @@
                         </a>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-center">
-                        <button 
-                            class="bg-white border border-gray-300 rounded px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-                            @click="openModal($event, {{ json_encode($tutorial) }})"
-                        >Mettre à jour</button>
+                        @if ($tutorial['realisation_id'])
+                            <button 
+                                class="bg-white border border-gray-300 rounded px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                                @click="openModal($event, {{ json_encode($tutorial) }})"
+                            >Mettre à jour</button>
+                        @else
+                            <button 
+                                class="bg-blue-500 border border-gray-300 rounded px-4 py-2 text-sm font-medium text-white hover:bg-blue-600"
+                                @click="startTutorial({ id: {{ $tutorial['id'] }}, name: '{{ $tutorial['name'] }}', autoformation_name: '{{ $tutorial['autoformation_name'] }}' })"
+                            >Commencer</button>
+                        @endif
                     </td>
                 </tr>
                 @endforeach
@@ -95,8 +105,9 @@
                     <label class="block text-gray-700 mb-1">Statut</label>
                     <select x-model="tutorial.status" class="w-full border rounded px-3 py-2">
                         <option value="Non commencé">Non commencé</option>
-                        <option value="encours">En cours</option>
-                        <option value="termine">Terminé</option>
+                        <option value="En cours">En cours</option>
+                        <option value="Terminé">Terminé</option>
+                        <!-- <option value="Abandonné">Abandonné</option> -->
                     </select>
                 </div>
                 <div class="mb-4">
@@ -128,6 +139,7 @@ function modalHandler() {
         show: false,
         tutorial: {
             id: null,
+            realisation_id: null,
             status: 'Non commencé',
             github: '',
             project: '',
@@ -136,6 +148,7 @@ function modalHandler() {
         openModal(event, tutorial) {
             this.tutorial = {
                 id: tutorial.id,
+                realisation_id: tutorial.realisation_id,
                 status: tutorial.status || 'Non commencé',
                 github: tutorial.github || '',
                 project: tutorial.project || '',
@@ -146,10 +159,72 @@ function modalHandler() {
         close() {
             this.show = false;
         },
+        startTutorial(tutorial) {
+            // Send POST to create new RealisationTutoriel
+            fetch('/api/realisations', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({
+                    tutorial_id: tutorial.id,
+                    etat: 'En cours',
+                    github_link: null
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(errorData => {
+                        throw new Error(errorData.message || 'Échec de la création.');
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert('Tutoriel commencé avec succès!');
+                window.location.reload();
+            })
+            .catch(error => {
+                alert('Erreur lors du démarrage du tutoriel: ' + error.message);
+            });
+        },
         save() {
-            // TODO: Send AJAX request to update tutorial (implement as needed)
-            alert('Données enregistrées pour le tutoriel ID: ' + this.tutorial.id);
-            this.close();
+            const realisationId = this.tutorial.realisation_id;
+            if (!realisationId) {
+                alert('Erreur: ID de réalisation manquant.');
+                return;
+            }
+
+            fetch(`/api/realisations/${realisationId}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({
+                    etat: this.tutorial.status,
+                    github_link: this.tutorial.github ? this.tutorial.github : null
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(errorData => {
+                        throw new Error(errorData.message || 'Échec de la mise à jour.');
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert('Statut mis à jour avec succès!');
+                console.log('Update successful:', data);
+                this.close();
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error('Erreur lors de la mise à jour:', error);
+                alert('Erreur lors de la mise à jour: ' + error.message);
+            });
         }
     }
 }
