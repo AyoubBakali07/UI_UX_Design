@@ -21,13 +21,13 @@ return new class extends Migration {
             $table->timestamps();
         });
 
-        Schema::create('autoformation_technologie', function (Blueprint $table) {
-            $table->id();
-            $table->string('title')->nullable();
-            $table->foreignId('autoformation_id')->constrained('autoformations')->onDelete('cascade');
-            $table->foreignId('technologie_id')->constrained('technologies')->onDelete('cascade');
-            $table->timestamps();
-        });
+        // Schema::create('autoformation_technologie', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('title')->nullable();
+        //     $table->foreignId('autoformation_id')->constrained('autoformations')->onDelete('cascade');
+        //     $table->foreignId('technologie_id')->constrained('technologies')->onDelete('cascade');
+        //     $table->timestamps();
+        // });
     }
 
     public function down() {
