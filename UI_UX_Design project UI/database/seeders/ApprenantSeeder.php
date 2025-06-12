@@ -20,17 +20,18 @@ class ApprenantSeeder extends Seeder
         $dm1 = Groupe::where('name', 'DM1')->first();
 
         $apprenants = [
-            ['name' => 'Alice Martin', 'email' => 'alicemartin@mail.com'],
-            ['name' => 'bob marley', 'email' => 'bobmarley@mail.com'],
-            ['name' => 'arthur luther', 'email' => 'arthurluther@mail.com'],
-            ['name' => 'Bob Johnson', 'email' => 'bobjohnson@mail.com'],
-            ['name' => 'Clara Wilson', 'email' => 'clarawilson@mail.com'],
-            ['name' => 'David Lee', 'email' => 'davidlee@mail.com'],
-            ['name' => 'Eva Brown', 'email' => 'evabrown@mail.com'],
-            ['name' => 'Frank Harris', 'email' => 'frankharris@mail.com'],
-            ['name' => 'Grace Lewis', 'email' => 'gracelewis@mail.com'],
-            ['name' => 'Henry Clark', 'email' => 'henryclark@mail.com'],
+            ['name' => 'Mohamed El Amrani', 'email' => 'mohamed.elamrani@mail.com'],
+            ['name' => 'Ayoub Benhaddou', 'email' => 'ayoub.benhaddou@mail.com'],
+            ['name' => 'Fatima Zahra', 'email' => 'fatima.zahra@mail.com'],
+            ['name' => 'Youssef El Mansouri', 'email' => 'youssef.elmansouri@mail.com'],
+            ['name' => 'Samira Bennis', 'email' => 'samira.bennis@mail.com'],
+            ['name' => 'Oussama El Idrissi', 'email' => 'oussama.elidrissi@mail.com'],
+            ['name' => 'Khadija Moutawakil', 'email' => 'khadija.moutawakil@mail.com'],
+            ['name' => 'Nabil Chaoui', 'email' => 'nabil.chaoui@mail.com'],
+            ['name' => 'Salma Lahlou', 'email' => 'salma.lahlou@mail.com'],
+            ['name' => 'Rachid Bouzid', 'email' => 'rachid.bouzid@mail.com'],
         ];
+        
 
         foreach ($apprenants as $apprenant) {
             // Randomly assign to either DW104 or DM1

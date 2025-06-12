@@ -37,8 +37,8 @@ class FormateurDashboardController extends Controller
                 $relevantAutoformationRealisations = $apprenant->realisationAutoformations->whereIn('autoformation_id', $formateurAutoformationIds);
 
                 // Calculate completed tutorials and projects based on relevant realisations
-                $completedRelevantTutorials = $relevantTutorialRealisations->where('etat', 'termine')->count();
-                $completedRelevantProjects = $relevantAutoformationRealisations->where('status', 'termine')->count();
+                $completedRelevantTutorials = $relevantTutorialRealisations->where('etat', 'Terminé')->count();
+                $completedRelevantProjects = $relevantAutoformationRealisations->where('status', 'Terminé')->count();
 
                 // Calculate progression
                 $progress = $totalRelevantTutoriels > 0

@@ -34,10 +34,10 @@
                         Statut
                     </th>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Liens
+                    Lien du cours
                     </th>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Action
+                        Actions
                     </th>
                 </tr>
             </thead>
@@ -98,8 +98,8 @@
     <div x-show="show" class="fixed inset-0 z-40 flex items-center justify-center" style="display: none;">
         <div class="absolute inset-0 bg-black/40" @click="close"></div>
         <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6 relative z-10" @click.away="close">
-            <h2 class="text-xl font-bold mb-2">Mettre à jour le statut</h2>
-            <p class="mb-4 text-gray-500">Ajoutez votre progression et des liens vers vos ressources.</p>
+            <h2 class="text-xl font-bold mb-2">Mettre à jour la progression</h2>
+            <p class="mb-4 text-gray-500">Ajoutez votre progression et votre lien GitHub</p>
             <form @submit.prevent="save">
                 <div class="mb-4">
                     <label class="block text-gray-700 mb-1">Statut</label>

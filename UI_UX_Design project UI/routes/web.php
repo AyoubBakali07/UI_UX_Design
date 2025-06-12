@@ -26,7 +26,7 @@ Route::middleware(['auth:formateur'])->group(function () {
 Route::middleware(['auth:apprenant'])->group(function () {
     Route::get('/Apprenant/dashboard/{autoformationId?}', [ApprenantDashboardController::class, 'index'])->name('Apprenant.dashboard');
     Route::get('/Apprenant/courses', [ApprenantCourseController::class, 'index'])->name('Apprenant.courses.index');
-    Route::get('/Apprenant/course/{autoformationId}/sections', [ApprenantCourseController::class, 'sections'])->name('Apprenant.course.sections');
+    // Route::get('/Apprenant/course/{autoformationId}/sections', [ApprenantCourseController::class, 'sections'])->name('Apprenant.course.sections');
     Route::get('/Apprenant/course/{autoformationId}/tutorial/{tutorialId}/edit', [ApprenantCourseController::class, 'editRealisation'])->name('apprenant.course.section.edit');
 });
 

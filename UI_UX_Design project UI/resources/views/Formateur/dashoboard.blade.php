@@ -13,7 +13,7 @@
                         <th class="py-2">Nom</th>
                         <th class="py-2">Progression</th>
                         <th class="py-2">Tutoriels terminés</th>
-                        <th class="py-2">Projets terminés</th>
+                        <th class="py-2">Autoformations terminées</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,9 +45,9 @@
                 <h3 class="text-xl font-semibold mb-2">Distribution de la progression</h3>
                 <canvas id="progressChart" width="200" height="200"></canvas>
                 <ul class="text-sm mt-4">
-                    <li><span class="font-bold text-blue-600">Over 75%:</span> {{ $distribution['over_75'] }}</li>
-                    <li><span class="font-bold text-blue-400">50 - 75%:</span> {{ $distribution['between_50_75'] }}</li>
-                    <li><span class="font-bold text-gray-500">Under 50%:</span> {{ $distribution['under_50'] }}</li>
+                    <li><span class="font-bold text-blue-600">Plus de 75%:</span> {{ $distribution['over_75'] }}</li>
+                    <li><span class="font-bold text-blue-400">Entre 50 % et 75 %:</span> {{ $distribution['between_50_75'] }}</li>
+                    <li><span class="font-bold text-gray-500">Moins de 50 %:</span> {{ $distribution['under_50'] }}</li>
                 </ul>
             </div>
             <div>
@@ -75,13 +75,14 @@
     new Chart(ctx, {
         type: 'pie',
         data: {
-            labels: ['Over 75%', '50 - 75%', 'Under 50%'],
+            labels: ['Plus de 75%', 'Entre 50 % et 75 %', 'Moins de 50 %'],
             datasets: [{
                 data: [
                     {{ $distribution['over_75'] }},
                     {{ $distribution['between_50_75'] }},
                     {{ $distribution['under_50'] }}
                 ],
+               
                 backgroundColor: [
                     '#2563eb',
                     '#60a5fa',
