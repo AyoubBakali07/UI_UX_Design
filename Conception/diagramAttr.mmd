@@ -20,29 +20,26 @@ classDiagram
     namespace PkgAutoformation {
         class Autoformation {
             +id: int
-            +titre: string
+            +title: Varchar
             +description: text
-            +start_date: date
-            +end_date: date
         }
 
         class Tutoriel {
             +id: int
-            +titre: string
+            +title: string
             +contenu: text
             +ordre: int
         }
 
         class RealisationAutoformation {
             +id: int
-            +date_realisation: date
-            +statut: string
-            +commentaire: text
+            +statut: enum
         }
 
         class RealisationTutoriel {
             +id: int
             +Etat: enum
+            +github_link: VARCHAR
         }
     }
 
@@ -51,14 +48,18 @@ classDiagram
         class Competence {
             +id: int
             +nom: string
-            +description: text
         }
 
         class Technologie {
             +id: int
             +nom: string
-            +version: string
         }
+    }
+    class Formateur{
+        +id: int
+        +name: string
+        +email: string
+        +password: string
     }
 
     %% === Relationships ===
@@ -73,3 +74,6 @@ classDiagram
     Autoformation --> Tutoriel : contient
     Technologie --> Competence : couvre
     RealisationTutoriel --> Tutoriel : réalise
+
+    Formateur --> Groupe : appartient à
+    Formateur --> Autoformation : creé
