@@ -9,6 +9,8 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->text('description');
+            $table->unsignedBigInteger('formateur_id')->nullable();
+            $table->foreign('formateur_id')->references('id')->on('formateurs')->onDelete('set null');
             $table->timestamps();
         });
 
@@ -17,17 +19,11 @@ return new class extends Migration {
             $table->string('title');
             $table->text('contenu')->nullable();
             $table->integer('ordre')->nullable();
+            $table->string('course_link')->nullable();
             $table->foreignId('autoformation_id')->nullable()->constrained()->onDelete('cascade');
             $table->timestamps();
         });
 
-        // Schema::create('autoformation_technologie', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->string('title')->nullable();
-        //     $table->foreignId('autoformation_id')->constrained('autoformations')->onDelete('cascade');
-        //     $table->foreignId('technologie_id')->constrained('technologies')->onDelete('cascade');
-        //     $table->timestamps();
-        // });
     }
 
     public function down() {

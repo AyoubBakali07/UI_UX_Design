@@ -42,6 +42,7 @@ class ApprenantDashboardController extends Controller
                     'status'   => $realisation->etat,
                     'autoformation_name' => $tutoriel->autoformation->title,
                     'github'   => $realisation->github_link ?? '',
+                    'course_link' => $tutoriel->course_link,
                 ];
             } else {
                 return [
@@ -52,6 +53,7 @@ class ApprenantDashboardController extends Controller
                     'status'   => 'Non commencé',
                     'autoformation_name' => $tutoriel->autoformation->title,
                     'github'   => '',
+                    'course_link' => $tutoriel->course_link,
                 ];
             }
         });
