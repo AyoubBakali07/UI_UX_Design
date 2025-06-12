@@ -6,8 +6,8 @@ actor Formateur
 rectangle "package_suivi_avancement_autoformation" {
     usecase "Suivre sa progression" as UC1
     usecase "Visualiser les modules terminés et restants" as UC3
-    usecase "Modifier ou Supprimer ses liens" as UC8
-    usecase "Ajouter des liens" as UC9
+    usecase "Modifier ou supprimer ses liens GitHub" as UC8
+    usecase "Ajouter les liens GitHub" as UC9
     usecase "Accéder aux rapports d'avancement" as UC4
     usecase "Fournir des commentaires sur l'avancement" as UC5
 }

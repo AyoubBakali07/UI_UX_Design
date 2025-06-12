@@ -1,14 +1,19 @@
 @startuml
 left to right direction
 actor Étudiant
-actor Formateur
+' actor Formateur
 
-rectangle "Sprint 2 : Fonctionnalités avancées et automatisation" {
-    usecase "Modifier ou supprimer ses liens" as UC8
-    usecase "Fournir des commentaires sur l'avancement" as UC5
+rectangle "Sprint 2 : Fonctionnalités de base pour le suivi de progression" {
+    usecase "Suivre sa progression" as UC1
+    usecase "Visualiser les modules terminés et restants" as UC3
+    usecase "Ajouter des liens GitHub" as UC9
+    ' usecase "Accéder aux rapports d'avancement" as UC4
 }
 
-Étudiant -- UC8
-Formateur -- UC5
+Étudiant -- UC1
+Étudiant -- UC3
+Étudiant -- UC9
+
+' Formateur -- UC4
 
 @enduml
