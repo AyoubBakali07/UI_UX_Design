@@ -27,7 +27,7 @@
                             <span class="text-xs ml-2">{{ $apprenant['progress'] }}%</span>
                         </td>
                         <td class="py-2">{{ $apprenant['tutorials'] }}</td>
-                        <td class="py-2">{{ $apprenant['projects'] }}</td>
+                        <td class="py-2">{{ $apprenant['autoformations'] }}</td>
                     </tr>
                     @endforeach
                 </tbody>

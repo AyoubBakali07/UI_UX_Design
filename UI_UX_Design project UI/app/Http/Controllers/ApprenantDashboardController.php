@@ -21,12 +21,20 @@ class ApprenantDashboardController extends Controller
         $apprenant = Auth::guard('apprenant')->user();
         $autoformation = null;
 
-        // Get all tutorials for the apprenant (even if not started)
+        // Find the apprenant's formateur (teacher) by groupe_id
+        $formateur = \App\Models\Formateur::where('groupe_id', $apprenant->groupe_id)->first();
+        // Get only autoformations of this formateur
+        $autoformations = \App\Models\Autoformation::where('formateur_id', $formateur->id)->get();
+        $formateurAutoformationIds = $autoformations->pluck('id');
+
+        // Get all tutorials for the apprenant (even if not started), but only those for their teacher
         if ($autoformationId) {
-            $autoformation = Autoformation::with('tutoriels')->findOrFail($autoformationId);
+            $autoformation = Autoformation::with('tutoriels')->where('id', $autoformationId)->whereIn('id', $formateurAutoformationIds)->firstOrFail();
             $tutoriels = $autoformation->tutoriels;
         } else {
-            $tutoriels = \App\Models\Tutoriel::with('autoformation')->paginate(10);
+            $tutoriels = \App\Models\Tutoriel::with('autoformation')
+                ->whereIn('autoformation_id', $formateurAutoformationIds)
+                ->paginate(10);
         }
 
         $inProgressTutorials = $tutoriels->map(function ($tutoriel) use ($apprenant) {
@@ -67,9 +75,11 @@ class ApprenantDashboardController extends Controller
                 ->where('etat', 'Terminé')
                 ->count();
         } else {
-            // Global progress across all tutoriels
-            $totalTutoriels = \App\Models\Tutoriel::count();
+            // Global progress across all tutoriels belonging to this apprenant's teacher
+            $tutorielIds = \App\Models\Tutoriel::whereIn('autoformation_id', $formateurAutoformationIds)->pluck('id');
+            $totalTutoriels = $tutorielIds->count();
             $completedTutoriels = \App\Models\RealisationTutoriel::where('apprenant_id', $apprenant->id)
+                ->whereIn('tutoriel_id', $tutorielIds)
                 ->where('etat', 'Terminé')
                 ->count();
         }

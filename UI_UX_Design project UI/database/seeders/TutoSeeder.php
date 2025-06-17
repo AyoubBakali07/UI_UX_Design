@@ -1,4 +1,5 @@
 <?php
+// database/seeders/TutoSeeder.php
 
 namespace Database\Seeders;
 
@@ -14,56 +15,92 @@ class TutoSeeder extends Seeder
      */
     public function run(): void
     {
-        // Get autoformations by title
         $js = \App\Models\Autoformation::where('title', 'JavaScript Fondamentaux')->first();
-        $php = \App\Models\Autoformation::where('title', 'Programmation Orientée Objet en PHP')->first();
-        $laravel = \App\Models\Autoformation::where('title', 'Laravel : Framework PHP Efficace')->first();
-        $kotlin = \App\Models\Autoformation::where('title', 'Développement Android avec Kotlin')->first();
-        $html = \App\Models\Autoformation::where('title', 'HTML et CSS pour les Débutants')->first();
+        $php = \App\Models\Autoformation::where('title', 'POO en PHP')->first();
         $css = \App\Models\Autoformation::where('title', 'Techniques avancées de CSS')->first();
+        $html = \App\Models\Autoformation::where('title', 'HTML & CSS pour Débutants')->first();
+        $android = \App\Models\Autoformation::where('title', 'Android & Kotlin')->first();
+        $laravel = \App\Models\Autoformation::where('title', 'Laravel : Framework PHP')->first();
+        $python = \App\Models\Autoformation::where('title', 'Python : Bases & Avancées')->first();
+        $vue = \App\Models\Autoformation::where('title', 'Vue.js : Frontend Moderne')->first();
+        $node = \App\Models\Autoformation::where('title', 'Node.js & Express')->first();
+        $docker = \App\Models\Autoformation::where('title', 'Docker & Orchestration')->first();
+        $symfony = \App\Models\Autoformation::where('title', 'Symfony : Framework PHP')->first();
+        $react = \App\Models\Autoformation::where('title', 'React : Interfaces Dynamiques')->first();
 
-        // Tutorials for each autoformation
         $tutos = [
             $js?->id => [
-                ['title' => 'Variables en JavaScript', 'contenu' => 'Contenu sur les variables JS', 'ordre' => 1, 'course_link' => 'https://www.w3schools.com/js/'],
-                ['title' => 'Fonctions en JavaScript', 'contenu' => 'Contenu sur les fonctions JS', 'ordre' => 2, 'course_link' => 'https://www.w3schools.com/js/'],
-                ['title' => 'Objets en JavaScript', 'contenu' => 'Contenu sur les objets JS', 'ordre' => 3, 'course_link' => 'https://www.w3schools.com/js/js_objects.asp'],
+                ['title' => 'Variables en JS', 'contenu' => 'Concepts de base', 'ordre' => 1, 'course_link' => 'https://www.w3schools.com/js/js_variables.asp'],
+                ['title' => 'Fonctions en JS', 'contenu' => 'Définitions et usages', 'ordre' => 2, 'course_link' => 'https://www.w3schools.com/js/js_functions.asp'],
+                ['title' => 'Objets en JS', 'contenu' => 'Propriétés et méthodes', 'ordre' => 3, 'course_link' => 'https://www.w3schools.com/js/js_objects.asp'],
             ],
             $php?->id => [
-                ['title' => 'Classes et Objets en PHP', 'contenu' => 'Contenu sur les classes et objets PHP', 'ordre' => 1, 'course_link' => 'https://www.w3schools.com/php/php_oop_classes_objects.asp'],
-                ['title' => 'Héritage en PHP', 'contenu' => 'Contenu sur l\'héritage PHP', 'ordre' => 2, 'course_link' => 'https://www.w3schools.com/php/php_oop_inheritance.asp'],
-            ],
-            $laravel?->id => [
-                ['title' => 'Introduction à Laravel', 'contenu' => 'Contenu sur l\'introduction à Laravel', 'ordre' => 1, 'course_link' => 'https://laravel.com/docs/10.x'],
-                ['title' => 'Les Routes dans Laravel', 'contenu' => 'Contenu sur les routes Laravel', 'ordre' => 2, 'course_link' => 'https://laravel.com/docs/10.x/routing'],
-                ['title' => 'Les Contrôleurs dans Laravel', 'contenu' => 'Contenu sur les contrôleurs Laravel', 'ordre' => 3, 'course_link' => 'https://laravel.com/docs/10.x/controllers'],
-            ],
-            $kotlin?->id => [
-                ['title' => 'Introduction à Kotlin', 'contenu' => 'Contenu sur Kotlin', 'ordre' => 1, 'course_link' => 'https://kotlinlang.org/docs/home.html'],
-                ['title' => 'Première App Android', 'contenu' => 'Contenu sur la première app Android', 'ordre' => 2, 'course_link' => 'https://developer.android.com/kotlin'],
-            ],
-            $html?->id => [
-                ['title' => 'Introduction à HTML', 'contenu' => 'Contenu sur HTML', 'ordre' => 1, 'course_link' => 'https://www.w3schools.com/html/'],
-                ['title' => 'CSS Basics', 'contenu' => 'Contenu sur CSS', 'ordre' => 2, 'course_link' => 'https://www.w3schools.com/css/'],
+                ['title' => 'Classes & Objets', 'contenu' => 'Déclaration et instanciation', 'ordre' => 1, 'course_link' => 'https://www.w3schools.com/php/php_oop_classes_objects.asp'],
+                ['title' => 'Héritage', 'contenu' => 'extends & parent', 'ordre' => 2, 'course_link' => 'https://www.w3schools.com/php/php_oop_inheritance.asp'],
+                ['title' => 'Interfaces & Traits', 'contenu' => 'Contrats et réutilisation', 'ordre' => 3, 'course_link' => 'https://www.php.net/manual/fr/language.oop5.traits.php'],
             ],
             $css?->id => [
-                ['title' => 'Introduction à CSS', 'contenu' => 'Contenu sur CSS', 'ordre' => 1, 'course_link' => 'https://www.w3schools.com/css/'],
-                ['title' => 'Flexbox', 'contenu' => 'Contenu sur Flexbox', 'ordre' => 2, 'course_link' => 'https://www.w3schools.com/css/css3_flexbox.asp'],
-                ['title' => 'Grid', 'contenu' => 'Contenu sur Grid', 'ordre' => 3, 'course_link' => 'https://www.w3schools.com/css/css_grid.asp'],
+                ['title' => 'Flexbox', 'contenu' => 'Layout flexible', 'ordre' => 1, 'course_link' => 'https://www.w3schools.com/css/css_flexbox.asp'],
+                ['title' => 'Grid', 'contenu' => 'Mise en page avancée', 'ordre' => 2, 'course_link' => 'https://www.w3schools.com/css/css_grid.asp'],
+                ['title' => 'Animations CSS', 'contenu' => 'Transitions & keyframes', 'ordre' => 3, 'course_link' => 'https://www.w3schools.com/css/css3_animations.asp'],
+            ],
+            $html?->id => [
+                ['title' => 'Structure HTML', 'contenu' => 'Balises de base', 'ordre' => 1, 'course_link' => 'https://www.w3schools.com/html/html_intro.asp'],
+                ['title' => 'Sélecteurs CSS', 'contenu' => 'Ciblage des éléments', 'ordre' => 2, 'course_link' => 'https://www.w3schools.com/css/css_selectors.asp'],
+                ['title' => 'Formulaires HTML', 'contenu' => 'Inputs & validation', 'ordre' => 3, 'course_link' => 'https://www.w3schools.com/html/html_forms.asp'],
+            ],
+            $android?->id => [
+                ['title' => 'Intro Kotlin', 'contenu' => 'Syntaxe & types', 'ordre' => 1, 'course_link' => 'https://kotlinlang.org/docs/home.html'],
+                ['title' => 'Première App', 'contenu' => 'UI de base', 'ordre' => 2, 'course_link' => 'https://developer.android.com/kotlin'],
+                ['title' => 'Activités & Intents', 'contenu' => 'Navigation', 'ordre' => 3, 'course_link' => 'https://developer.android.com/guide/components/intents-filters'],
+            ],
+            $laravel?->id => [
+                ['title' => 'Routes', 'contenu' => 'Définir des endpoints', 'ordre' => 1, 'course_link' => 'https://laravel.com/docs/10.x/routing'],
+                ['title' => 'Contrôleurs', 'contenu' => 'Logique métier', 'ordre' => 2, 'course_link' => 'https://laravel.com/docs/10.x/controllers'],
+                ['title' => 'Eloquent', 'contenu' => 'ORM Laravel', 'ordre' => 3, 'course_link' => 'https://laravel.com/docs/10.x/eloquent'],
+            ],
+            $python?->id => [
+                ['title' => 'Intro Python', 'contenu' => 'Syntaxe & types', 'ordre' => 1, 'course_link' => 'https://www.w3schools.com/python/python_intro.asp'],
+                ['title' => 'Variables Python', 'contenu' => 'Définitions et usages', 'ordre' => 2, 'course_link' => 'https://www.w3schools.com/python/python_variables.asp'],
+                ['title' => 'Fonctions Python', 'contenu' => 'Définitions et usages', 'ordre' => 3, 'course_link' => 'https://www.w3schools.com/python/python_functions.asp'],
+            ],
+            $vue?->id => [
+                ['title' => 'Intro Vue', 'contenu' => 'Syntaxe & types', 'ordre' => 1, 'course_link' => 'https://www.w3schools.com/vue/vue_intro.asp'],
+                ['title' => 'Variables Vue', 'contenu' => 'Définitions et usages', 'ordre' => 2, 'course_link' => 'https://www.w3schools.com/vue/vue_variables.asp'],
+                ['title' => 'Fonctions Vue', 'contenu' => 'Définitions et usages', 'ordre' => 3, 'course_link' => 'https://www.w3schools.com/vue/vue_functions.asp'],
+            ],
+            $node?->id => [
+                ['title' => 'Intro Node', 'contenu' => 'Syntaxe & types', 'ordre' => 1, 'course_link' => 'https://www.w3schools.com/nodejs/nodejs_intro.asp'],
+                ['title' => 'Variables Node', 'contenu' => 'Définitions et usages', 'ordre' => 2, 'course_link' => 'https://www.w3schools.com/nodejs/nodejs_variables.asp'],
+                ['title' => 'Fonctions Node', 'contenu' => 'Définitions et usages', 'ordre' => 3, 'course_link' => 'https://www.w3schools.com/nodejs/nodejs_functions.asp'],
+            ],
+            $docker?->id => [
+                ['title' => 'Intro Docker', 'contenu' => 'Syntaxe & types', 'ordre' => 1, 'course_link' => 'https://www.w3schools.com/docker/docker_intro.asp'],
+                ['title' => 'Variables Docker', 'contenu' => 'Définitions et usages', 'ordre' => 2, 'course_link' => 'https://www.w3schools.com/docker/docker_variables.asp'],
+                ['title' => 'Fonctions Docker', 'contenu' => 'Définitions et usages', 'ordre' => 3, 'course_link' => 'https://www.w3schools.com/docker/docker_functions.asp'],
+            ],
+            $symfony?->id => [
+                ['title' => 'Intro Symfony', 'contenu' => 'Syntaxe & types', 'ordre' => 1, 'course_link' => 'https://www.w3schools.com/symfony/symfony_intro.asp'],
+                ['title' => 'Variables Symfony', 'contenu' => 'Définitions et usages', 'ordre' => 2, 'course_link' => 'https://www.w3schools.com/symfony/symfony_variables.asp'],
+                ['title' => 'Fonctions Symfony', 'contenu' => 'Définitions et usages', 'ordre' => 3, 'course_link' => 'https://www.w3schools.com/symfony/symfony_functions.asp'],
+            ],
+            $react?->id => [
+                ['title' => 'Intro React', 'contenu' => 'Syntaxe & types', 'ordre' => 1, 'course_link' => 'https://www.w3schools.com/react/react_intro.asp'],
+                ['title' => 'Variables React', 'contenu' => 'Définitions et usages', 'ordre' => 2, 'course_link' => 'https://www.w3schools.com/react/react_variables.asp'],
+                ['title' => 'Fonctions React', 'contenu' => 'Définitions et usages', 'ordre' => 3, 'course_link' => 'https://www.w3schools.com/react/react_functions.asp'],
             ],
         ];
 
-        // Seed the tutorials
-        foreach ($tutos as $autoformation_id => $tutorials) {
-            // Skip if autoformation not found
-            if (!$autoformation_id) continue;
-            foreach ($tutorials as $tuto) {
+
+        foreach ($tutos as $autoformationId => $tutoList) {
+            if (!$autoformationId) continue;
+            foreach ($tutoList as $tuto) {
                 \App\Models\Tutoriel::create([
                     'title' => $tuto['title'],
                     'contenu' => $tuto['contenu'],
                     'ordre' => $tuto['ordre'],
-                    'autoformation_id' => $autoformation_id,
-                    'course_link' => $tuto['course_link'] ?? null,
+                    'course_link' => $tuto['course_link'],
+                    'autoformation_id' => $autoformationId,
                 ]);
             }
         }

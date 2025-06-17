@@ -24,7 +24,12 @@ class ApprenantCourseController extends Controller
      */
     public function index()
     {
-        $allCourses = Autoformation::all();
+        // Get the logged-in apprenant
+        $apprenant = Auth::guard('apprenant')->user();
+        // Find the apprenant's formateur (teacher) by groupe_id
+        $formateur = \App\Models\Formateur::where('groupe_id', $apprenant->groupe_id)->first();
+        // Get only autoformations of this formateur
+        $allCourses = \App\Models\Autoformation::where('formateur_id', $formateur->id)->get();
         return view('Apprenant.courses.index', compact('allCourses'));
     }
 
@@ -36,11 +41,18 @@ class ApprenantCourseController extends Controller
      */
     public function sections($autoformationId)
     {
-        // 1. Load the selected Autoformation along with all its related Tutoriels (using the updated relationship name)
-        $autoformation = Autoformation::with('tutoriels')->findOrFail($autoformationId);
+        // Get the logged-in apprenant
+        $apprenant = Auth::guard('apprenant')->user();
+        // Find the apprenant's formateur (teacher) by groupe_id
+        $formateur = \App\Models\Formateur::where('groupe_id', $apprenant->groupe_id)->first();
+        // Only allow access if the autoformation belongs to this formateur
+        $autoformation = Autoformation::with('tutoriels')
+            ->where('id', $autoformationId)
+            ->where('formateur_id', $formateur->id)
+            ->firstOrFail();
 
         // 2. Retrieve the logged-in Apprenant ID directly
-        $apprenantId = Auth::id();
+        $apprenantId = $apprenant->id;
 
         // Although middleware should handle this, add a check for safety
         // this is not important i can remove it cuz i have middleware 

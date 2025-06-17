@@ -31,14 +31,28 @@ class FormateurDashboardController extends Controller
         $apprenants = Apprenant::where('groupe_id', $formateurGroupId)
             ->with(['realisationTutoriels', 'realisationAutoformations'])
             ->get()
-            ->map(function ($apprenant) use ($formateurTutorialIds, $formateurAutoformationIds, $totalRelevantTutoriels) {
-                // Filter realisations relevant to this formateur's autoformations/tutorials
-                $relevantTutorialRealisations = $apprenant->realisationTutoriels->whereIn('tutoriel_id', $formateurTutorialIds);
-                $relevantAutoformationRealisations = $apprenant->realisationAutoformations->whereIn('autoformation_id', $formateurAutoformationIds);
+            ->map(function ($apprenant) use ($formateurAutoformations, $formateurTutorialIds, $totalRelevantTutoriels) {
+                // Tutoriels terminés
+                $completedRelevantTutorials = $apprenant->realisationTutoriels
+                    ->whereIn('tutoriel_id', $formateurTutorialIds)
+                    ->where('etat', 'Terminé')
+                    ->count();
 
-                // Calculate completed tutorials and projects based on relevant realisations
-                $completedRelevantTutorials = $relevantTutorialRealisations->where('etat', 'Terminé')->count();
-                $completedRelevantProjects = $relevantAutoformationRealisations->where('status', 'Terminé')->count();
+                // Autoformations terminées: Only if all tutoriels in the autoformation are done
+                $completedRelevantAutoformations = 0;
+                foreach ($formateurAutoformations as $autoformation) {
+                    $tutoriels = $autoformation->tutoriels;
+                    if ($tutoriels->count() === 0) continue;
+                    $allTutorielsDone = $tutoriels->every(function ($tutoriel) use ($apprenant) {
+                        return \App\Models\RealisationTutoriel::where('apprenant_id', $apprenant->id)
+                            ->where('tutoriel_id', $tutoriel->id)
+                            ->where('etat', 'Terminé')
+                            ->exists();
+                    });
+                    if ($allTutorielsDone) {
+                        $completedRelevantAutoformations++;
+                    }
+                }
 
                 // Calculate progression
                 $progress = $totalRelevantTutoriels > 0
@@ -49,7 +63,7 @@ class FormateurDashboardController extends Controller
                     'name'      => $apprenant->name,
                     'progress'  => $progress,
                     'tutorials' => $completedRelevantTutorials,
-                    'projects'  => $completedRelevantProjects,
+                    'autoformations' => $completedRelevantAutoformations,
                 ];
             });
 
