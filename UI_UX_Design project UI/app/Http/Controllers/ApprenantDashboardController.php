@@ -26,7 +26,7 @@ class ApprenantDashboardController extends Controller
             $autoformation = Autoformation::with('tutoriels')->findOrFail($autoformationId);
             $tutoriels = $autoformation->tutoriels;
         } else {
-            $tutoriels = \App\Models\Tutoriel::with('autoformation')->get();
+            $tutoriels = \App\Models\Tutoriel::with('autoformation')->paginate(10);
         }
 
         $inProgressTutorials = $tutoriels->map(function ($tutoriel) use ($apprenant) {
@@ -58,25 +58,28 @@ class ApprenantDashboardController extends Controller
             }
         });
 
-        // Calculate progress metrics based on new logic
-        $totalTutoriels = $tutoriels->count();
-        $completedTutoriels = 0;
-        foreach ($tutoriels as $tutoriel) {
-            $realisation = \App\Models\RealisationTutoriel::where('apprenant_id', $apprenant->id)
-                ->where('tutoriel_id', $tutoriel->id)
+        // Calculate progress metrics accurately
+        if ($autoformationId) {
+            // Progress within the selected autoformation
+            $totalTutoriels = $tutoriels->count();
+            $completedTutoriels = \App\Models\RealisationTutoriel::where('apprenant_id', $apprenant->id)
+                ->whereIn('tutoriel_id', $tutoriels->pluck('id'))
                 ->where('etat', 'Terminé')
-                ->first();
-            if ($realisation) {
-                $completedTutoriels++;
-            }
+                ->count();
+        } else {
+            // Global progress across all tutoriels
+            $totalTutoriels = \App\Models\Tutoriel::count();
+            $completedTutoriels = \App\Models\RealisationTutoriel::where('apprenant_id', $apprenant->id)
+                ->where('etat', 'Terminé')
+                ->count();
         }
 
-        $progress = 0;
-        if ($totalTutoriels > 0) {
-            $progress = round(($completedTutoriels / $totalTutoriels) * 100);
-        }
+        // Avoid division by zero
+
+        // Calculate percentage
+        $progress = $totalTutoriels > 0 ? round(($completedTutoriels / $totalTutoriels) * 100) : 0;
 
         // Pass data to the view
-        return view('Apprenant.dashboard', compact('inProgressTutorials', 'progress', 'completedTutoriels', 'totalTutoriels', 'autoformation', 'autoformationId'));
+        return view('Apprenant.dashboard', compact('inProgressTutorials', 'progress', 'completedTutoriels', 'totalTutoriels', 'autoformation', 'autoformationId', 'tutoriels'));
     }
 } 

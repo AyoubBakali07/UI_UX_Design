@@ -98,6 +98,12 @@
             </tbody>
         </table>
     </div>
+    <!-- Pagination -->
+    <div class="mt-4">
+        @if($tutoriels instanceof \Illuminate\Contracts\Pagination\Paginator)
+            {{ $tutoriels->links() }}
+        @endif
+    </div>
     <!-- Modal for updating status and links -->
     <div x-show="show" class="fixed inset-0 z-40 flex items-center justify-center" style="display: none;">
         <div class="absolute inset-0 bg-black/40" @click="close"></div>
