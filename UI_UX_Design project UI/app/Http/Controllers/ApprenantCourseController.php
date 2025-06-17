@@ -43,6 +43,7 @@ class ApprenantCourseController extends Controller
         $apprenantId = Auth::id();
 
         // Although middleware should handle this, add a check for safety
+        // this is not important i can remove it cuz i have middleware 
         if (!$apprenantId) {
              // This should ideally not be reached if middleware is active and correct
             abort(403, 'Authentication required.'); // Or redirect to a login page
@@ -68,8 +69,6 @@ class ApprenantCourseController extends Controller
                 'ordre'           => $tutoriel->ordre ?? null, // Assuming Tutoriel model has an 'ordre' attribute
                 'etat'            => $realisation->etat ?? 'not_started', // Default status if no realisation found
                 'github_link'     => $realisation->github_link ?? null,
-                // 'project_link'    => $realisation->project_link ?? null,
-                // 'slide_link'      => $realisation->slide_link ?? null,
                 // Add an editable flag if needed, based on status or user role
                 // 'editable'      => $realisation ? ($realisation->etat === 'encours') : false,
             ];
@@ -86,6 +85,7 @@ class ApprenantCourseController extends Controller
      * @param  int  $tutorialId
      * @return \Illuminate\View\View
      */
+
     public function editRealisation($autoformationId, $tutorialId)
     {
         $apprenant = Auth::user();
@@ -127,8 +127,6 @@ class ApprenantCourseController extends Controller
             'etat' => 'required|in:Non commencé,En cours,Terminé,Abandonné',
             'notes' => 'nullable|string',
             'github_link' => 'nullable|url',
-                // 'project_link' => 'nullable|url',
-                // 'slide_link' => 'nullable|url'
         ]);
 
         $apprenant = Auth::user();
@@ -151,8 +149,6 @@ class ApprenantCourseController extends Controller
             'tutoriel_id' => $tutorialId,
             'etat' => $validated['etat'],
             'github_link' => $validated['github_link'] ?? null,
-            // 'project_link' => $validated['project_link'] ?? null,
-            // 'slide_link' => $validated['slide_link'] ?? null
         ]);
 
         return response()->json($realisation, 201);
@@ -166,8 +162,6 @@ class ApprenantCourseController extends Controller
             'etat' => 'required|in:Non commencé,En cours,Terminé,Abandonné',
             'notes' => 'nullable|string',
             'github_link' => 'nullable|url',
-            // 'project_link' => 'nullable|url',
-            // 'slide_link' => 'nullable|url'
         ]);
 
         $realisation->update($validated);
