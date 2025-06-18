@@ -152,8 +152,8 @@ function modalHandler() {
             realisation_id: null,
             status: 'Non commencé',
             github: '',
-            project: '',
-            slides: ''
+            // project: '',
+            // slides: ''
         },
         openModal(event, tutorial) {
             this.tutorial = {
@@ -161,8 +161,8 @@ function modalHandler() {
                 realisation_id: tutorial.realisation_id,
                 status: tutorial.status || 'Non commencé',
                 github: tutorial.github || '',
-                project: tutorial.project || '',
-                slides: tutorial.slides || ''
+                // project: tutorial.project || '',
+                // slides: tutorial.slides || ''
             };
             this.show = true;
         },

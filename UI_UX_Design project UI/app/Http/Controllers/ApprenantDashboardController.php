@@ -14,7 +14,6 @@ class ApprenantDashboardController extends Controller
     {
         $this->middleware('auth:apprenant');
     }
-
     public function index($autoformationId = null)
     {
         // Get the authenticated apprenant
