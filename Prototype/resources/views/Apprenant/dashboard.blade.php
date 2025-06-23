@@ -192,7 +192,7 @@ function modalHandler() {
                 return response.json();
             })
             .then(data => {
-                alert('Tutoriel commencé avec succès!');
+                // alert('Tutoriel commencé avec succès!');
                 window.location.reload();
             })
             .catch(error => {
@@ -226,14 +226,14 @@ function modalHandler() {
                 return response.json();
             })
             .then(data => {
-                alert('Statut mis à jour avec succès!');
+                // alert('Statut mis à jour avec succès!');
                 console.log('Update successful:', data);
                 this.close();
                 window.location.reload();
             })
             .catch(error => {
                 console.error('Erreur lors de la mise à jour:', error);
-                alert('Erreur lors de la mise à jour: ' + error.message);
+                // alert('Erreur lors de la mise à jour: ' + error.message);
             });
         }
     }

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-6xl mx-auto py-8 px-4">
+<div class="max-w-6xl mx-auto py-8 px-2">
     <h1 class="text-3xl font-bold mb-8">Tableau de bord du formateur</h1>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <!-- Progression des apprenants -->

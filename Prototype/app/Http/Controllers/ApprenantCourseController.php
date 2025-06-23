@@ -117,6 +117,7 @@ class ApprenantCourseController extends Controller
             'etat' => 'required|in:Non commencé,En cours,Terminé',
             // 'notes' => 'nullable|string',
             'github_link' => 'nullable|url',
+            // 'github_link' => 'required|url',
         ]);
 
         $realisation->update($validated);
